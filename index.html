@@ -1,0 +1,1917 @@
+```html
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>TaSeVerse | Inglés auténtico</title>
+
+    <style>
+
+        /* =========================
+           CONFIGURACIÓN GENERAL
+        ========================= */
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background: #050718;
+            color: white;
+            overflow-x: hidden;
+        }
+
+        body::before {
+            content: "";
+            position: fixed;
+            inset: 0;
+
+            background-image:
+                radial-gradient(circle, rgba(255,255,255,.9) 1px, transparent 1px),
+                radial-gradient(circle, rgba(255,255,255,.6) 1px, transparent 1px);
+
+            background-size: 90px 90px, 150px 150px;
+            background-position: 10px 20px, 50px 80px;
+
+            opacity: .35;
+            z-index: -2;
+        }
+
+        body::after {
+            content: "";
+            position: fixed;
+
+            width: 650px;
+            height: 650px;
+
+            border-radius: 50%;
+
+            background:
+                radial-gradient(
+                    circle,
+                    rgba(83,52,180,.35),
+                    transparent 65%
+                );
+
+            top: 5%;
+            left: 50%;
+
+            transform: translateX(-50%);
+
+            z-index: -1;
+        }
+
+
+        /* =========================
+           BARRA DE NAVEGACIÓN
+        ========================= */
+
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+
+            z-index: 1000;
+
+            padding: 18px 6%;
+
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            background: rgba(5,7,24,.82);
+
+            backdrop-filter: blur(15px);
+
+            border-bottom:
+                1px solid rgba(255,255,255,.08);
+        }
+
+        .logo {
+            font-size: 1.7rem;
+            font-weight: bold;
+            letter-spacing: 1px;
+        }
+
+        .logo span {
+            color: #a98cff;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 25px;
+
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: white;
+
+            text-decoration: none;
+
+            font-size: .95rem;
+
+            transition: .3s;
+        }
+
+        .nav-links a:hover {
+            color: #bda8ff;
+        }
+
+        .menu-btn {
+            display: none;
+
+            font-size: 1.8rem;
+
+            cursor: pointer;
+        }
+
+
+        /* =========================
+           PORTADA
+        ========================= */
+
+        .hero {
+
+            min-height: 100vh;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            text-align: center;
+
+            padding:
+                120px 20px 70px;
+
+            position: relative;
+        }
+
+
+        /* PLANETA */
+
+        .planet {
+
+            position: absolute;
+
+            width: 170px;
+            height: 170px;
+
+            border-radius: 50%;
+
+            background:
+                radial-gradient(
+                    circle at 30% 30%,
+                    #d6c8ff,
+                    #694bd4 45%,
+                    #21164e 75%
+                );
+
+            box-shadow:
+                0 0 70px
+                rgba(132,100,255,.45);
+
+            right: 8%;
+            top: 22%;
+
+            animation:
+                float 6s ease-in-out infinite;
+        }
+
+        .planet::after {
+
+            content: "";
+
+            position: absolute;
+
+            width: 240px;
+            height: 50px;
+
+            border:
+                8px solid
+                rgba(206,193,255,.6);
+
+            border-radius: 50%;
+
+            top: 60px;
+            left: -35px;
+
+            transform:
+                rotate(-15deg);
+        }
+
+
+        .hero-content {
+
+            max-width: 850px;
+
+            position: relative;
+
+            z-index: 2;
+        }
+
+
+        /* PEQUEÑO TÍTULO */
+
+        .small-title {
+
+            color: #bba7ff;
+
+            letter-spacing: 4px;
+
+            text-transform: uppercase;
+
+            font-size: .85rem;
+
+            margin-bottom: 20px;
+        }
+
+
+        /* LOGO GRANDE */
+
+        .hero h1 {
+
+            font-size:
+                clamp(3.5rem, 10vw, 7rem);
+
+            line-height: .95;
+
+            margin-bottom: 25px;
+
+            text-shadow:
+                0 0 35px
+                rgba(157,124,255,.45);
+        }
+
+        .hero h1 span {
+            color: #a98cff;
+        }
+
+
+        /* LEMA */
+
+        .slogan {
+
+            color: #d7c9ff !important;
+
+            font-size:
+                1.35rem !important;
+
+            font-weight: bold;
+
+            font-style: italic;
+
+            margin-bottom:
+                18px !important;
+
+            text-shadow:
+                0 0 20px
+                rgba(157,124,255,.35);
+        }
+
+
+        .hero p {
+
+            max-width: 650px;
+
+            margin: auto;
+
+            color: #c6c8d8;
+
+            font-size: 1.1rem;
+
+            line-height: 1.7;
+        }
+
+
+        /* BOTÓN */
+
+        .main-btn {
+
+            display: inline-block;
+
+            margin-top: 35px;
+
+            padding:
+                15px 30px;
+
+            border-radius: 30px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #8165e8,
+                    #bd82ff
+                );
+
+            color: white;
+
+            text-decoration: none;
+
+            font-weight: bold;
+
+            box-shadow:
+                0 10px 30px
+                rgba(130,91,230,.3);
+
+            transition: .3s;
+
+            border: none;
+
+            cursor: pointer;
+        }
+
+        .main-btn:hover {
+
+            transform:
+                translateY(-4px);
+
+            box-shadow:
+                0 15px 35px
+                rgba(130,91,230,.45);
+        }
+
+
+        /* =========================
+           SECCIONES
+        ========================= */
+
+        section {
+
+            padding:
+                100px 7%;
+        }
+
+        .section-title {
+
+            text-align: center;
+
+            margin-bottom: 55px;
+        }
+
+        .section-title h2 {
+
+            font-size:
+                2.5rem;
+
+            margin-bottom: 12px;
+        }
+
+        .section-title p {
+
+            color: #aeb0c3;
+        }
+
+
+        /* =========================
+           TARJETAS
+        ========================= */
+
+        .cards {
+
+            max-width: 1150px;
+
+            margin: auto;
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(3, 1fr);
+
+            gap: 25px;
+        }
+
+
+        .card {
+
+            background:
+                rgba(18,21,48,.78);
+
+            border:
+                1px solid
+                rgba(165,145,255,.15);
+
+            border-radius: 22px;
+
+            padding: 30px;
+
+            transition: .35s;
+
+            position: relative;
+
+            overflow: hidden;
+        }
+
+        .card:hover {
+
+            transform:
+                translateY(-8px);
+
+            border-color:
+                rgba(165,145,255,.5);
+
+            box-shadow:
+                0 20px 50px
+                rgba(0,0,0,.25);
+        }
+
+        .card-icon {
+
+            font-size:
+                2.8rem;
+
+            margin-bottom:
+                18px;
+        }
+
+        .card h3 {
+
+            margin-bottom:
+                12px;
+
+            font-size:
+                1.4rem;
+        }
+
+        .card p {
+
+            color:
+                #afb2c5;
+
+            line-height:
+                1.6;
+        }
+
+        .card button {
+
+            margin-top:
+                20px;
+
+            padding:
+                10px 18px;
+
+            border:
+                1px solid #8165e8;
+
+            background:
+                transparent;
+
+            color: white;
+
+            border-radius:
+                20px;
+
+            cursor:
+                pointer;
+
+            transition:
+                .3s;
+        }
+
+        .card button:hover {
+
+            background:
+                #8165e8;
+        }
+
+
+        /* =========================
+           MÚSICA
+        ========================= */
+
+        .music-box {
+
+            max-width:
+                800px;
+
+            margin:
+                auto;
+
+            display:
+                flex;
+
+            flex-direction:
+                column;
+
+            gap:
+                15px;
+        }
+
+        .song {
+
+            display:
+                flex;
+
+            align-items:
+                center;
+
+            justify-content:
+                space-between;
+
+            gap:
+                20px;
+
+            background:
+                #151936;
+
+            padding:
+                20px;
+
+            border-radius:
+                16px;
+
+            border:
+                1px solid
+                rgba(255,255,255,.06);
+        }
+
+        .song strong {
+            font-size:
+                1.05rem;
+        }
+
+        .song small {
+            color:
+                #9da0b7;
+        }
+
+        .song button {
+
+            border:
+                none;
+
+            background:
+                #8569ec;
+
+            color:
+                white;
+
+            padding:
+                10px 17px;
+
+            border-radius:
+                20px;
+
+            cursor:
+                pointer;
+        }
+
+
+        /* =========================
+           GRAMÁTICA
+        ========================= */
+
+        .grammar-box {
+
+            max-width:
+                850px;
+
+            margin:
+                auto;
+
+            background:
+                rgba(17,20,45,.9);
+
+            padding:
+                35px;
+
+            border-radius:
+                25px;
+
+            border:
+                1px solid
+                rgba(170,145,255,.2);
+        }
+
+        .question {
+
+            font-size:
+                1.2rem;
+
+            margin-bottom:
+                25px;
+        }
+
+        .answers {
+
+            display:
+                grid;
+
+            gap:
+                12px;
+        }
+
+        .answer {
+
+            padding:
+                15px;
+
+            background:
+                #24284f;
+
+            border:
+                none;
+
+            color:
+                white;
+
+            border-radius:
+                12px;
+
+            cursor:
+                pointer;
+
+            text-align:
+                left;
+
+            transition:
+                .2s;
+        }
+
+        .answer:hover {
+
+            background:
+                #393e70;
+        }
+
+        #result {
+
+            margin-top:
+                20px;
+
+            font-weight:
+                bold;
+        }
+
+
+        /* =========================
+           CUENTOS
+        ========================= */
+
+        .story {
+
+            max-width:
+                850px;
+
+            margin:
+                auto;
+
+            padding:
+                40px;
+
+            border-radius:
+                25px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    rgba(42,34,86,.9),
+                    rgba(16,20,47,.9)
+                );
+
+            border:
+                1px solid
+                rgba(255,255,255,.07);
+        }
+
+        .story h3 {
+
+            font-size:
+                1.8rem;
+
+            margin-bottom:
+                20px;
+        }
+
+        .story p {
+
+            color:
+                #d0d1df;
+
+            line-height:
+                1.8;
+
+            font-size:
+                1.05rem;
+        }
+
+
+        /* =========================
+           CLASES VIRTUALES
+        ========================= */
+
+        .levels {
+
+            max-width:
+                1000px;
+
+            margin:
+                auto;
+
+            display:
+                grid;
+
+            grid-template-columns:
+                repeat(3, 1fr);
+
+            gap:
+                25px;
+        }
+
+        .level {
+
+            text-align:
+                center;
+
+            padding:
+                35px 25px;
+
+            border-radius:
+                25px;
+
+            background:
+                rgba(19,22,50,.85);
+
+            border:
+                1px solid
+                rgba(255,255,255,.08);
+
+            transition:
+                .3s;
+        }
+
+        .level:hover {
+
+            transform:
+                translateY(-7px);
+
+            border-color:
+                rgba(165,145,255,.4);
+        }
+
+        .level h3 {
+
+            font-size:
+                1.5rem;
+
+            margin:
+                15px 0;
+        }
+
+        .level p {
+
+            color:
+                #aeb0c3;
+
+            line-height:
+                1.6;
+        }
+
+        .level button {
+
+            margin-top:
+                20px;
+
+            border:
+                none;
+
+            padding:
+                12px 22px;
+
+            border-radius:
+                25px;
+
+            background:
+                #8267e8;
+
+            color:
+                white;
+
+            cursor:
+                pointer;
+        }
+
+
+        /* =========================
+           MODAL
+        ========================= */
+
+        .modal {
+
+            display:
+                none;
+
+            position:
+                fixed;
+
+            inset:
+                0;
+
+            background:
+                rgba(0,0,0,.75);
+
+            z-index:
+                2000;
+
+            align-items:
+                center;
+
+            justify-content:
+                center;
+
+            padding:
+                20px;
+        }
+
+        .modal-content {
+
+            max-width:
+                500px;
+
+            width:
+                100%;
+
+            background:
+                #11142e;
+
+            padding:
+                35px;
+
+            border-radius:
+                25px;
+
+            text-align:
+                center;
+
+            border:
+                1px solid
+                rgba(170,145,255,.25);
+        }
+
+        .close {
+
+            float:
+                right;
+
+            cursor:
+                pointer;
+
+            font-size:
+                1.5rem;
+        }
+
+
+        /* =========================
+           PIE DE PÁGINA
+        ========================= */
+
+        footer {
+
+            text-align:
+                center;
+
+            padding:
+                55px 20px;
+
+            color:
+                #85889e;
+
+            border-top:
+                1px solid
+                rgba(255,255,255,.07);
+        }
+
+        footer .footer-logo {
+
+            font-size:
+                1.5rem;
+
+            color:
+                white;
+
+            font-weight:
+                bold;
+        }
+
+        footer .footer-slogan {
+
+            color:
+                #bda8ff;
+
+            font-style:
+                italic;
+
+            margin-top:
+                10px;
+        }
+
+
+        /* =========================
+           ANIMACIÓN
+        ========================= */
+
+        @keyframes float {
+
+            0%,100% {
+                transform:
+                    translateY(0);
+            }
+
+            50% {
+                transform:
+                    translateY(-20px);
+            }
+        }
+
+
+        /* =========================
+           CELULARES
+        ========================= */
+
+        @media(max-width:800px) {
+
+            .nav-links {
+
+                display:
+                    none;
+
+                position:
+                    absolute;
+
+                top:
+                    70px;
+
+                left:
+                    0;
+
+                width:
+                    100%;
+
+                background:
+                    #080a20;
+
+                flex-direction:
+                    column;
+
+                padding:
+                    25px;
+
+                text-align:
+                    center;
+            }
+
+            .nav-links.active {
+                display:
+                    flex;
+            }
+
+            .menu-btn {
+                display:
+                    block;
+            }
+
+            .planet {
+
+                width:
+                    90px;
+
+                height:
+                    90px;
+
+                right:
+                    4%;
+
+                top:
+                    18%;
+
+                opacity:
+                    .5;
+            }
+
+            .planet::after {
+
+                width:
+                    130px;
+
+                height:
+                    30px;
+
+                top:
+                    30px;
+
+                left:
+                    -20px;
+
+                border-width:
+                    5px;
+            }
+
+            .cards,
+            .levels {
+
+                grid-template-columns:
+                    1fr;
+            }
+
+            section {
+
+                padding:
+                    80px 5%;
+            }
+
+            .hero h1 {
+
+                font-size:
+                    4rem;
+            }
+
+            .slogan {
+
+                font-size:
+                    1.1rem !important;
+
+                line-height:
+                    1.5;
+            }
+
+            .song {
+
+                flex-direction:
+                    column;
+
+                align-items:
+                    flex-start;
+            }
+
+            .song button {
+
+                width:
+                    100%;
+            }
+        }
+
+    </style>
+</head>
+
+
+<body>
+
+
+    <!-- =========================
+         MENÚ
+    ========================= -->
+
+    <nav>
+
+        <div class="logo">
+            ✦ <span>TaSe</span>Verse
+        </div>
+
+        <div
+            class="menu-btn"
+            onclick="toggleMenu()"
+        >
+            ☰
+        </div>
+
+        <ul
+            class="nav-links"
+            id="navLinks"
+        >
+
+            <li>
+                <a href="#inicio">
+                    Inicio
+                </a>
+            </li>
+
+            <li>
+                <a href="#explora">
+                    Explora
+                </a>
+            </li>
+
+            <li>
+                <a href="#musica">
+                    Música
+                </a>
+            </li>
+
+            <li>
+                <a href="#gramatica">
+                    Gramática
+                </a>
+            </li>
+
+            <li>
+                <a href="#cuentos">
+                    Cuentos
+                </a>
+            </li>
+
+            <li>
+                <a href="#clases">
+                    Clases
+                </a>
+            </li>
+
+        </ul>
+
+    </nav>
+
+
+
+    <!-- =========================
+         PORTADA
+    ========================= -->
+
+    <section
+        class="hero"
+        id="inicio"
+    >
+
+        <div class="planet"></div>
+
+        <div class="hero-content">
+
+            <div class="small-title">
+
+                ✦ UN UNIVERSO PARA APRENDER INGLÉS ✦
+
+            </div>
+
+
+            <h1>
+
+                TaSe<span>Verse</span>
+
+            </h1>
+
+
+            <p class="slogan">
+
+                Entre notas e historias:
+                una ruta hacia el inglés auténtico.
+
+            </p>
+
+
+            <p>
+
+                Explora, escucha, juega y aprende inglés
+                a través de experiencias que conectan
+                con el mundo real.
+
+            </p>
+
+
+            <a
+                href="#explora"
+                class="main-btn"
+            >
+
+                🚀 Comenzar aventura
+
+            </a>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =========================
+         EXPLORA
+    ========================= -->
+
+    <section
+        id="explora"
+    >
+
+        <div class="section-title">
+
+            <h2>
+                🌌 Explora el universo
+            </h2>
+
+            <p>
+                Elige cómo quieres aprender hoy.
+            </p>
+
+        </div>
+
+
+        <div class="cards">
+
+
+            <!-- JUEGOS -->
+
+            <div class="card">
+
+                <div class="card-icon">
+                    🎮
+                </div>
+
+                <h3>
+                    Juegos
+                </h3>
+
+                <p>
+
+                    Aprende vocabulario,
+                    expresiones y conceptos
+                    mientras superas desafíos.
+
+                </p>
+
+                <button
+                    onclick="openModal('Juegos')"
+                >
+
+                    Explorar juegos
+
+                </button>
+
+            </div>
+
+
+            <!-- MÚSICA -->
+
+            <div class="card">
+
+                <div class="card-icon">
+                    🎵
+                </div>
+
+                <h3>
+                    Música
+                </h3>
+
+                <p>
+
+                    Aprende nuevas palabras,
+                    expresiones y pronunciación
+                    a través de canciones.
+
+                </p>
+
+                <button
+                    onclick="scrollToSection('musica')"
+                >
+
+                    Explorar música
+
+                </button>
+
+            </div>
+
+
+            <!-- CUENTOS -->
+
+            <div class="card">
+
+                <div class="card-icon">
+                    📖
+                </div>
+
+                <h3>
+                    Cuentos
+                </h3>
+
+                <p>
+
+                    Viaja a otros mundos mediante
+                    historias creadas para aprender
+                    inglés.
+
+                </p>
+
+                <button
+                    onclick="scrollToSection('cuentos')"
+                >
+
+                    Explorar cuentos
+
+                </button>
+
+            </div>
+
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =========================
+         MÚSICA
+    ========================= -->
+
+    <section
+        id="musica"
+    >
+
+        <div class="section-title">
+
+            <h2>
+                🎵 Aprende con música
+            </h2>
+
+            <p>
+                Escucha, descubre y practica.
+            </p>
+
+        </div>
+
+
+        <div class="music-box">
+
+
+            <div class="song">
+
+                <div>
+
+                    <strong>
+                        🌙 English Under the Stars
+                    </strong>
+
+                    <br>
+
+                    <small>
+                        Vocabulario básico
+                    </small>
+
+                </div>
+
+
+                <button
+                    onclick="playMusic()"
+                >
+
+                    ▶ Reproducir
+
+                </button>
+
+            </div>
+
+
+
+            <div class="song">
+
+                <div>
+
+                    <strong>
+                        🚀 Journey Through English
+                    </strong>
+
+                    <br>
+
+                    <small>
+                        Expresiones cotidianas
+                    </small>
+
+                </div>
+
+
+                <button
+                    onclick="playMusic()"
+                >
+
+                    ▶ Reproducir
+
+                </button>
+
+            </div>
+
+
+
+            <div class="song">
+
+                <div>
+
+                    <strong>
+                        ⭐ Words Among the Stars
+                    </strong>
+
+                    <br>
+
+                    <small>
+                        Vocabulario y pronunciación
+                    </small>
+
+                </div>
+
+
+                <button
+                    onclick="playMusic()"
+                >
+
+                    ▶ Reproducir
+
+                </button>
+
+            </div>
+
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =========================
+         GRAMÁTICA
+    ========================= -->
+
+    <section
+        id="gramatica"
+    >
+
+        <div class="section-title">
+
+            <h2>
+                ✏️ Laboratorio de gramática
+            </h2>
+
+            <p>
+                Aprende las reglas y ponlas en práctica.
+            </p>
+
+        </div>
+
+
+        <div class="grammar-box">
+
+            <div class="question">
+
+                <strong>
+                    ⭐ Misión gramatical
+                </strong>
+
+                <br><br>
+
+                Choose the correct sentence:
+
+            </div>
+
+
+            <div class="answers">
+
+                <button
+                    class="answer"
+                    onclick="answer(false)"
+                >
+
+                    She go to school every day.
+
+                </button>
+
+
+                <button
+                    class="answer"
+                    onclick="answer(true)"
+                >
+
+                    She goes to school every day.
+
+                </button>
+
+
+                <button
+                    class="answer"
+                    onclick="answer(false)"
+                >
+
+                    She going to school every day.
+
+                </button>
+
+            </div>
+
+
+            <div id="result"></div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =========================
+         CUENTOS
+    ========================= -->
+
+    <section
+        id="cuentos"
+    >
+
+        <div class="section-title">
+
+            <h2>
+                📖 Cuentos entre estrellas
+            </h2>
+
+            <p>
+                Historias para aprender mientras imaginas.
+            </p>
+
+        </div>
+
+
+        <div class="story">
+
+            <h3>
+                🌙 The Little Star
+            </h3>
+
+
+            <p>
+
+                Once upon a time, there was a little star
+                that lived at the edge of the universe.
+
+                <br><br>
+
+                Every night, she looked at Earth and dreamed
+                about visiting a new place.
+
+                <br><br>
+
+                One day, she decided to begin her journey.
+
+                <br><br>
+
+                "Maybe learning a new language is also
+                a journey," she thought.
+
+                <br><br>
+
+                And with that idea, she started travelling
+                through the universe.
+
+            </p>
+
+
+            <button
+                class="main-btn"
+                onclick="openModal('Cuentos')"
+            >
+
+                ✨ Continuar historia
+
+            </button>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =========================
+         CLASES
+    ========================= -->
+
+    <section
+        id="clases"
+    >
+
+        <div class="section-title">
+
+            <h2>
+                🚀 Clases virtuales
+            </h2>
+
+            <p>
+                Elige tu nivel y comienza tu viaje.
+            </p>
+
+        </div>
+
+
+        <div class="levels">
+
+
+            <!-- BÁSICO -->
+
+            <div class="level">
+
+                <div style="font-size:3rem;">
+                    🌱
+                </div>
+
+                <h3>
+                    Básico
+                </h3>
+
+                <p>
+
+                    Greetings, vocabulary,
+                    numbers, simple sentences
+                    and everyday English.
+
+                </p>
+
+                <button
+                    onclick="openModal('Nivel Básico')"
+                >
+
+                    Entrar a clase
+
+                </button>
+
+            </div>
+
+
+
+            <!-- MEDIO -->
+
+            <div class="level">
+
+                <div style="font-size:3rem;">
+                    🌎
+                </div>
+
+                <h3>
+                    Medio
+                </h3>
+
+                <p>
+
+                    Conversations, grammar,
+                    listening and everyday
+                    expressions.
+
+                </p>
+
+                <button
+                    onclick="openModal('Nivel Medio')"
+                >
+
+                    Entrar a clase
+
+                </button>
+
+            </div>
+
+
+
+            <!-- ALTO -->
+
+            <div class="level">
+
+                <div style="font-size:3rem;">
+                    🚀
+                </div>
+
+                <h3>
+                    Alto
+                </h3>
+
+                <p>
+
+                    Advanced conversations,
+                    academic vocabulary
+                    and fluency.
+
+                </p>
+
+                <button
+                    onclick="openModal('Nivel Alto')"
+                >
+
+                    Entrar a clase
+
+                </button>
+
+            </div>
+
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =========================
+         PIE DE PÁGINA
+    ========================= -->
+
+    <footer>
+
+        <div class="footer-logo">
+
+            ✦ TaSeVerse ✦
+
+        </div>
+
+
+        <p class="footer-slogan">
+
+            Entre notas e historias:
+            una ruta hacia el inglés auténtico.
+
+        </p>
+
+
+        <p style="margin-top:15px;">
+
+            Learn · Explore · Discover
+
+        </p>
+
+    </footer>
+
+
+
+    <!-- =========================
+         VENTANA EMERGENTE
+    ========================= -->
+
+    <div
+        class="modal"
+        id="modal"
+    >
+
+        <div class="modal-content">
+
+            <span
+                class="close"
+                onclick="closeModal()"
+            >
+
+                ×
+
+            </span>
+
+
+            <h2 id="modalTitle"></h2>
+
+
+            <br>
+
+
+            <p id="modalText">
+
+                Esta sección estará disponible
+                próximamente.
+
+            </p>
+
+
+            <br>
+
+
+            <button
+                class="main-btn"
+                onclick="closeModal()"
+            >
+
+                Volver al universo
+
+            </button>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- =========================
+         JAVASCRIPT
+    ========================= -->
+
+    <script>
+
+
+        /* MENÚ CELULAR */
+
+        function toggleMenu() {
+
+            document
+                .getElementById("navLinks")
+                .classList.toggle("active");
+
+        }
+
+
+        /* IR A UNA SECCIÓN */
+
+        function scrollToSection(id) {
+
+            document
+                .getElementById(id)
+                .scrollIntoView({
+                    behavior: "smooth"
+                });
+
+        }
+
+
+        /* VENTANA EMERGENTE */
+
+        function openModal(title) {
+
+            document
+                .getElementById("modalTitle")
+                .innerText = title;
+
+
+            document
+                .getElementById("modal")
+                .style.display = "flex";
+
+        }
+
+
+        function closeModal() {
+
+            document
+                .getElementById("modal")
+                .style.display = "none";
+
+        }
+
+
+        /* GRAMÁTICA */
+
+        function answer(correct) {
+
+            const result =
+                document
+                .getElementById("result");
+
+
+            if (correct) {
+
+                result.innerHTML =
+                    "🎉 Excellent! That is correct.";
+
+            } else {
+
+                result.innerHTML =
+                    "💫 Almost! Try again.";
+
+            }
+
+        }
+
+
+        /* MÚSICA */
+
+        function playMusic() {
+
+            const audio =
+                new AudioContext();
+
+
+            const oscillator =
+                audio.createOscillator();
+
+
+            const gain =
+                audio.createGain();
+
+
+            oscillator.connect(gain);
+
+            gain.connect(
+                audio.destination
+            );
+
+
+            oscillator.frequency.value =
+                440;
+
+
+            gain.gain.setValueAtTime(
+                0.05,
+                audio.currentTime
+            );
+
+
+            oscillator.start();
+
+
+            oscillator.stop(
+                audio.currentTime + 0.7
+            );
+
+        }
+
+
+    </script>
+
+</body>
+
+</html>
+```
