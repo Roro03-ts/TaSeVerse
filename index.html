@@ -1,241 +1,284 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#08091f">
-<meta name="description" content="TaSeVerse: aprende inglés entre música, historias, juegos y desafíos interactivos.">
-<title>TaSeVerse | Inglés auténtico</title>
-<style>
-:root{--bg:#07091d;--panel:rgba(19,22,53,.88);--panel2:#111633;--purple:#9b7bff;--lilac:#d5c8ff;--cyan:#85e8ff;--text:#f7f5ff;--muted:#b9bbd5;--line:rgba(195,178,255,.2);--good:#8ef0bc;--bad:#ff9cae;--shadow:0 18px 55px rgba(0,0,0,.28)}
-*{box-sizing:border-box;margin:0;padding:0}
-html{scroll-behavior:smooth;scroll-padding-top:90px}
-body{font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:radial-gradient(ellipse at 50% -15%,#302263 0,transparent 42%),var(--bg);color:var(--text);line-height:1.6;overflow-x:hidden}
-body:before{content:"";position:fixed;inset:0;pointer-events:none;z-index:-1;background-image:radial-gradient(#fff 1px,transparent 1px),radial-gradient(rgba(183,163,255,.8) 1px,transparent 1px);background-size:83px 83px,137px 137px;background-position:15px 12px,55px 70px;opacity:.22}
-a{color:inherit}button,input,select{font:inherit}button{cursor:pointer}
-nav{position:sticky;top:0;z-index:20;display:flex;justify-content:space-between;align-items:center;gap:20px;padding:14px clamp(18px,5vw,70px);background:rgba(7,9,29,.86);backdrop-filter:blur(16px);border-bottom:1px solid var(--line)}
-.logo{font-size:1.45rem;font-weight:900;letter-spacing:.3px;text-decoration:none;white-space:nowrap}.logo span{color:var(--purple)}
-.navlinks{display:flex;gap:20px;list-style:none;align-items:center}.navlinks a{text-decoration:none;color:#ded9f7;font-size:.92rem}.navlinks a:hover{color:var(--cyan)}
-.menu-btn{display:none;border:1px solid var(--line);border-radius:10px;background:var(--panel);color:white;padding:6px 11px;font-size:1.2rem}
-.hero{min-height:78vh;display:grid;place-items:center;text-align:center;padding:100px 22px 80px;position:relative;isolation:isolate;overflow:hidden}
-.orb{position:absolute;width:clamp(100px,18vw,205px);aspect-ratio:1;border-radius:50%;background:radial-gradient(circle at 28% 25%,#e7dfff,#9a73f8 36%,#35226e 72%);box-shadow:0 0 70px #9871ff44;right:9%;top:15%;z-index:-1;animation:float 7s ease-in-out infinite}
-.orb:after{content:"";position:absolute;width:145%;height:28%;border:8px solid #d5c8ff88;border-radius:50%;top:38%;left:-22%;transform:rotate(-19deg)}
-.hero-inner{max-width:900px}.eyebrow{text-transform:uppercase;letter-spacing:3px;font-size:.78rem;color:var(--cyan);font-weight:800;margin-bottom:16px}
-h1{font-size:clamp(3.3rem,10vw,7.5rem);line-height:.98;letter-spacing:-3px;margin-bottom:24px;text-shadow:0 0 40px #a78bfa44}h1 span{color:var(--purple)}
-.slogan{font-size:clamp(1.05rem,2.6vw,1.5rem);font-style:italic;color:var(--lilac);font-weight:750;margin-bottom:18px}.hero-copy{max-width:680px;margin:auto;color:var(--muted);font-size:1.08rem}
-.actions{display:flex;justify-content:center;gap:12px;flex-wrap:wrap;margin-top:30px}
-.btn{border:1px solid transparent;border-radius:999px;padding:12px 20px;font-weight:800;transition:.2s;display:inline-flex;align-items:center;justify-content:center;gap:8px;text-decoration:none}
-.btn:hover{transform:translateY(-2px)}.primary{background:linear-gradient(130deg,#7d5ce5,#bd91ff);color:white;box-shadow:0 10px 28px #8764e844}.secondary{background:#ffffff08;border-color:var(--line);color:var(--text)}.small{padding:8px 14px;font-size:.9rem}
-section{padding:78px clamp(18px,6vw,84px)}.section-head{text-align:center;max-width:760px;margin:0 auto 38px}.section-head h2{font-size:clamp(1.8rem,4vw,2.7rem);line-height:1.15;margin-bottom:10px}.section-head p{color:var(--muted)}
-.pill{display:inline-flex;border:1px solid var(--line);background:#b49aff12;border-radius:99px;padding:5px 11px;color:var(--lilac);font-size:.8rem;font-weight:800;margin-bottom:13px}
-.grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px;max-width:1180px;margin:auto}
-.card,.panel{background:linear-gradient(145deg,rgba(24,27,63,.94),rgba(13,16,40,.92));border:1px solid var(--line);border-radius:22px;padding:25px;box-shadow:var(--shadow)}
-.card{transition:.25s}.card:hover{transform:translateY(-5px);border-color:#aa91ff88}.icon{font-size:2.25rem;margin-bottom:10px}.card h3{font-size:1.25rem;margin-bottom:8px}.card p{color:var(--muted);font-size:.96rem}.card .btn{margin-top:18px}
-.section-intro{max-width:950px;margin:-16px auto 25px;color:var(--muted);text-align:center}
-.toolbar{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin:0 auto 24px}.field{background:#0b0e27;border:1px solid var(--line);color:white;border-radius:12px;padding:10px 13px;min-width:190px;max-width:100%}
-.game-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px;max-width:1180px;margin:auto}.game-card{display:flex;flex-direction:column;align-items:flex-start;gap:10px}.game-card .btn{margin-top:auto}
-.game-area{max-width:850px;margin:28px auto 0;display:none}.game-area.visible{display:block}.game-top{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-bottom:16px;color:var(--lilac);font-weight:800}.game-question{font-size:1.35rem;font-weight:800;margin:8px 0 18px}.answers{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.answer{background:#25294f;border:1px solid #ffffff12;color:white;padding:13px 15px;border-radius:12px;text-align:left}.answer:hover{background:#38376a;border-color:#9c83ff}.answer.correct{border-color:var(--good);background:#173e38}.answer.wrong{border-color:var(--bad);background:#492537}.feedback{margin-top:15px;min-height:28px;font-weight:750}.feedback.good{color:var(--good)}.feedback.bad{color:var(--bad)}.word-input{width:100%;background:#090c25;border:1px solid var(--line);border-radius:12px;padding:14px;color:white;margin:8px 0 12px}.letter-grid{display:grid;grid-template-columns:repeat(8,minmax(0,1fr));gap:5px;margin:16px 0}.letter{border:1px solid var(--line);border-radius:8px;background:#202448;color:white;padding:7px 0;font-weight:800}.letter.selected{background:#775bd2}.word-list{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}.word-chip{background:#ffffff0b;border:1px solid var(--line);border-radius:99px;padding:5px 10px;font-size:.9rem}
-.music-list{max-width:1000px;margin:auto;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}.song{border:1px solid var(--line);background:var(--panel);border-radius:18px;padding:17px;min-width:0}.song-head{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;margin-bottom:12px}.song h3{font-size:1rem}.song small{color:var(--muted)}.video-wrap{aspect-ratio:16/9;background:#050718;border-radius:12px;overflow:hidden}.video-wrap iframe{width:100%;height:100%;border:0}.song-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
-.story-list{max-width:1050px;margin:auto;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}.story-card h3{margin-bottom:8px}.story-card p{color:var(--muted)}.story-body{margin-top:16px;padding-top:14px;border-top:1px solid var(--line);display:none}.story-body.open{display:block}.story-body p{margin:10px 0;color:#e4e2f5}.story-body .translation{color:#bdb8d9;font-size:.94rem}
-.quiz-box{max-width:850px;margin:auto}.quiz-box .question{font-size:1.25rem;font-weight:800;margin:8px 0 18px}.quiz-footer{display:flex;justify-content:space-between;gap:12px;align-items:center;flex-wrap:wrap;margin-top:18px}
-.levels{max-width:1100px;margin:auto;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px}.level{text-align:center}.level .icon{font-size:2.8rem}.level ul{text-align:left;color:var(--muted);padding-left:20px;margin:15px 0}.level .btn{width:100%}
-footer{text-align:center;padding:42px 20px;border-top:1px solid var(--line);color:#9d9fbb}footer .logo{display:block;margin-bottom:8px}footer .slogan{font-size:1rem;margin:8px 0}
-.modal{position:fixed;inset:0;z-index:50;background:#02030bdc;display:none;align-items:center;justify-content:center;padding:18px}.modal.open{display:flex}.modal-box{max-width:560px;width:100%;background:#111531;border:1px solid var(--line);border-radius:24px;padding:28px;box-shadow:var(--shadow)}.modal-head{display:flex;justify-content:space-between;gap:12px;align-items:center;margin-bottom:15px}.x{background:transparent;border:0;color:white;font-size:1.8rem}.modal-box p{color:var(--muted);margin:8px 0}.notice{max-width:900px;margin:20px auto 0;padding:14px 17px;border:1px solid var(--line);border-radius:14px;color:var(--muted);font-size:.92rem;background:#ffffff05}
-@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-17px)}}
-@media(max-width:850px){.navlinks{display:none;position:absolute;top:65px;left:0;right:0;padding:20px;background:#080a20;flex-direction:column;border-bottom:1px solid var(--line)}.navlinks.open{display:flex}.menu-btn{display:block}.grid,.game-grid,.levels{grid-template-columns:repeat(2,minmax(0,1fr))}.orb{right:-2%;top:12%;opacity:.5}.music-list{grid-template-columns:1fr}}
-@media(max-width:560px){.grid,.game-grid,.levels,.story-list{grid-template-columns:1fr}.hero{min-height:72vh}.hero h1{letter-spacing:-1px}.orb{width:95px;right:3%;top:12%}.answers{grid-template-columns:1fr}.letter-grid{grid-template-columns:repeat(6,minmax(0,1fr))}section{padding-top:62px;padding-bottom:62px}.card,.panel{padding:20px}}
-</style>
-</head>
-<body>
-<nav>
-  <a class="logo" href="#inicio" aria-label="TaSeVerse inicio">✦ <span>TaSe</span>Verse</a>
-  <button class="menu-btn" id="menuBtn" aria-label="Abrir menú" aria-expanded="false">☰</button>
-  <ul class="navlinks" id="navlinks">
-    <li><a href="#inicio">Inicio</a></li><li><a href="#explora">Explora</a></li><li><a href="#juegos">Juegos</a></li><li><a href="#musica">Música</a></li><li><a href="#gramatica">Gramática</a></li><li><a href="#cuentos">Cuentos</a></li><li><a href="#clases">Niveles</a></li>
-  </ul>
-</nav>
-
-<header class="hero" id="inicio">
-  <div class="orb" aria-hidden="true"></div>
-  <div class="hero-inner">
-    <div class="eyebrow">✦ Un universo para aprender inglés ✦</div>
-    <h1>TaSe<span>Verse</span></h1>
-    <p class="slogan">Entre notas e historias: una ruta hacia el inglés auténtico</p>
-    <p class="hero-copy">Explora, escucha, juega y aprende inglés a través de canciones, cuentos y desafíos que conectan el idioma con experiencias reales.</p>
-    <div class="actions"><a class="btn primary" href="#explora">🚀 Comenzar aventura</a><a class="btn secondary" href="#juegos">🎮 Ir a los juegos</a></div>
-  </div>
-</header>
-
-<section id="explora">
-  <div class="section-head"><span class="pill">Tu aventura empieza aquí</span><h2>🌌 Explora el universo</h2><p>Elige una ruta y avanza a tu ritmo. Cada práctica es un paso más hacia el inglés auténtico.</p></div>
-  <div class="grid">
-    <article class="card"><div class="icon">🎮</div><h3>Juegos interactivos</h3><p>Practica vocabulario, memoria, ortografía y oraciones con desafíos y puntuación.</p><a class="btn primary small" href="#juegos">Explorar juegos ↗</a></article>
-    <article class="card"><div class="icon">🎵</div><h3>Música en inglés</h3><p>Escucha canciones en sus reproductores de YouTube y practica expresiones y vocabulario.</p><a class="btn primary small" href="#musica">Escuchar canciones ↗</a></article>
-    <article class="card"><div class="icon">📖</div><h3>Cuentos entre estrellas</h3><p>Lee historias breves en inglés, consulta el apoyo en español y responde preguntas.</p><a class="btn primary small" href="#cuentos">Leer cuentos ↗</a></article>
-  </div>
-</section>
-
-<section id="juegos">
-  <div class="section-head"><span class="pill">Aprender jugando</span><h2>🎮 Misiones de la galaxia</h2><p>Elige una misión, responde y recibe retroalimentación al instante.</p></div>
-  <div class="toolbar"><label class="pill" for="gameLevel">Nivel de práctica</label><select class="field" id="gameLevel"><option value="all">Todos los niveles</option><option value="basic">Básico</option><option value="medium">Medio</option><option value="high">Alto</option></select></div>
-  <div class="game-grid" id="gameGrid"></div>
-  <div class="panel game-area" id="gameArea" aria-live="polite">
-    <div class="game-top"><span id="gameLabel">Misión</span><span id="gameScore">Puntos: 0</span></div>
-    <div id="gameContent"></div>
-    <div class="feedback" id="gameFeedback"></div>
-    <div class="actions" style="justify-content:flex-start"><button class="btn secondary" id="nextGameBtn">Siguiente desafío →</button><button class="btn secondary" id="closeGameBtn">Cerrar misión</button></div>
-  </div>
-  <div class="notice">Consejo: intenta responder antes de consultar una traducción. La puntuación de esta sesión se conserva mientras la página esté abierta.</div>
-</section>
-
-<section id="musica">
-  <div class="section-head"><span class="pill">Listen · Sing · Learn</span><h2>🎵 Aprende con música</h2><p>Escucha, canta y detecta palabras familiares. Selecciona reproducir en el vídeo que quieras practicar.</p></div>
-  <div class="toolbar"><input class="field" type="search" id="songSearch" placeholder="Buscar canción por nombre…" aria-label="Buscar canción"><select class="field" id="songFilter" aria-label="Filtrar canciones"><option value="all">Todas las canciones</option><option value="kids">Canciones para practicar</option><option value="playlist">Otras canciones y listas</option></select></div>
-  <div class="music-list" id="musicList"></div>
-  <div class="notice">Los vídeos se reproducen desde YouTube. Algunos propietarios restringen la reproducción integrada; si un vídeo no abre aquí, usa el botón «Abrir en YouTube».</div>
-</section>
-
-<section id="gramatica">
-  <div class="section-head"><span class="pill">Grammar lab</span><h2>✏️ Laboratorio de gramática</h2><p>Practica estructuras útiles y comprueba tu respuesta inmediatamente.</p></div>
-  <div class="panel quiz-box">
-    <div class="game-top"><span>⭐ Misión gramatical</span><span id="grammarProgress">Pregunta 1</span></div>
-    <div class="question" id="grammarQuestion"></div>
-    <div class="answers" id="grammarAnswers"></div>
-    <div class="feedback" id="grammarFeedback" aria-live="polite"></div>
-    <div class="quiz-footer"><span id="grammarScore">Puntuación: 0</span><button class="btn primary" id="grammarNext">Siguiente pregunta →</button></div>
-  </div>
-</section>
-
-<section id="cuentos">
-  <div class="section-head"><span class="pill">Stories in English</span><h2>📖 Cuentos entre estrellas</h2><p>Lee en inglés, descubre nuevas palabras y comprueba cuánto comprendiste.</p></div>
-  <div class="story-list" id="storyList"></div>
-</section>
-
-<section id="clases">
-  <div class="section-head"><span class="pill">Choose your level</span><h2>🚀 Rutas de aprendizaje</h2><p>Escoge el nivel que mejor se adapte a ti y practica con los recursos de TaSeVerse.</p></div>
-  <div class="levels">
-    <article class="card level"><div class="icon">🌱</div><h3>Básico · A1–A2</h3><p>Construye bases y gana confianza.</p><ul><li>Saludos y presentaciones</li><li>Vocabulario cotidiano</li><li>Oraciones simples</li><li>Comprensión de canciones</li></ul><button class="btn primary" data-level="basic">Comenzar nivel básico</button></article>
-    <article class="card level"><div class="icon">🌎</div><h3>Medio · B1–B2</h3><p>Conecta ideas y conversa con más soltura.</p><ul><li>Conversaciones cotidianas</li><li>Tiempos verbales</li><li>Comprensión lectora</li><li>Expresiones comunes</li></ul><button class="btn primary" data-level="medium">Comenzar nivel medio</button></article>
-    <article class="card level"><div class="icon">🚀</div><h3>Alto · C1+</h3><p>Afina la fluidez y la precisión.</p><ul><li>Conversación avanzada</li><li>Vocabulario académico</li><li>Opinión y argumentación</li><li>Lectura crítica</li></ul><button class="btn primary" data-level="high">Comenzar nivel alto</button></article>
-  </div>
-  <div class="notice">Las rutas incluyen práctica dentro de esta página. Las clases en vivo requieren que se añadan enlaces reales de videollamada cuando estén disponibles.</div>
-</section>
-
-<footer>
-  <a class="logo" href="#inicio">✦ <span>TaSe</span>Verse ✦</a>
-  <p class="slogan">Entre notas e historias: una ruta hacia el inglés auténtico</p>
-  <p>Learn · Explore · Discover</p>
-  <p style="font-size:.82rem;margin-top:12px">Una aventura de aprendizaje a tu ritmo.</p>
-</footer>
-
-<div class="modal" id="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
-  <div class="modal-box"><div class="modal-head"><h2 id="modalTitle">Tu ruta</h2><button class="x" id="modalClose" aria-label="Cerrar">×</button></div><div id="modalBody"></div><div class="actions" style="justify-content:flex-start"><button class="btn primary" id="modalAction">Ir a practicar</button><button class="btn secondary" id="modalCancel">Cerrar</button></div></div>
-</div>
 
 <script>
-"use strict";
-const $ = id => document.getElementById(id);
-const escapeHTML = s => String(s).replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
-$("menuBtn").addEventListener("click",()=>{const open=$("navlinks").classList.toggle("open");$("menuBtn").setAttribute("aria-expanded",String(open));});
-document.querySelectorAll(".navlinks a").forEach(a=>a.addEventListener("click",()=>{$("navlinks").classList.remove("open");$("menuBtn").setAttribute("aria-expanded","false");}));
+/* =====================================================
+   ACTUALIZACIÓN DE TaSeVerse
+   Conserva el código original y añade nuevos recursos.
+===================================================== */
 
-const songs=[
-{id:"H57vfgqq5Hk",title:"Song 1 · Discover English",category:"playlist",note:"Escucha general · identifica palabras conocidas"},
-{id:"gghDRJVxFxU",title:"Song 2 · English Listening",category:"playlist",note:"Comprensión auditiva"},
-{id:"l4WNrvVjiTw",title:"Song 3 · Listen and Learn",category:"playlist",note:"Escucha y repite expresiones"},
-{id:"pZw9veQ76fo",title:"Five Little Ducks",category:"kids",note:"Números, animales y repetición"},
-{id:"9mmF8zOlh_g",title:"BINGO",category:"kids",note:"Deletreo, ritmo y vocabulario"},
-{id:"fN1Cyr0ZK9M",title:"Song 6 · English Practice",category:"playlist",note:"Listening practice"},
-{id:"ALcL3MuU4xQ",title:"Song 7 · English Practice",category:"playlist",note:"Listening practice"},
-{id:"JRMAptlBgTk",title:"Song 8 · English Practice",category:"playlist",note:"Escucha y descubre palabras"},
-{id:"CXb9llX_LoU",title:"Song 9 · English Practice",category:"playlist",note:"Listening practice"},
-{id:"WX8HmogNyCY",title:"Head, Shoulders, Knees and Toes",category:"kids",note:"Partes del cuerpo y movimiento"},
-{id:"hft6uJQIF4g",title:"Song 11 · English Practice",category:"playlist",note:"Listening practice"},
-{id:"frN3nvhIHUk",title:"Do You Like Broccoli Ice Cream?",category:"kids",note:"Comida y pregunta Do you like…?"},
-{id:"_Ir0Mc6Qilo",title:"Song 13 · English Practice",category:"playlist",note:"Listening practice"},
-{id:"79DijItQXMM",title:"Song 14 · English Practice",category:"playlist",note:"Vídeo de la lista compartida"},
-{id:"YVVTZgwYwVo",title:"Song 15 · English Practice",category:"playlist",note:"Vídeo de la lista compartida"},
-{id:"ZSS5dEeMX64",title:"Song 16 · English Practice",category:"playlist",note:"Vídeo de la lista compartida"},
-{id:"RRq7lLawQB4",title:"Song 17 · English Practice",category:"playlist",note:"Vídeo de la lista compartida"},
-{id:"aO0abpVd5UI",title:"Song 18 · English Practice",category:"playlist",note:"Vídeo de la lista compartida"},
-{id:"UFatVn1hP3o",title:"Song 19 · English Practice",category:"playlist",note:"Vídeo de la lista compartida"}
-];
-function renderSongs(){
- const query=$("songSearch").value.trim().toLowerCase(), filter=$("songFilter").value;
- const filtered=songs.filter(s=>(filter==="all"||s.category===filter)&&(`${s.title} ${s.note} ${s.id}`).toLowerCase().includes(query));
- $("musicList").innerHTML=filtered.map((s,i)=>`<article class="song"><div class="song-head"><div><h3>🎧 ${escapeHTML(s.title)}</h3><small>${escapeHTML(s.note)}</small></div><span class="pill">#${songs.indexOf(s)+1}</span></div><div class="video-wrap"><iframe loading="lazy" src="https://www.youtube-nocookie.com/embed/${s.id}" title="${escapeHTML(s.title)}" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></div><div class="song-actions"><a class="btn secondary small" href="https://www.youtube.com/watch?v=${s.id}" target="_blank" rel="noopener noreferrer">↗ Abrir en YouTube</a><button class="btn secondary small" data-song-task="${s.id}">Practicar vocabulario</button></div><p class="feedback" id="songTask-${s.id}"></p></article>`).join("")||'<p>No se encontraron canciones. Prueba otra búsqueda.</p>';
- document.querySelectorAll("[data-song-task]").forEach(btn=>btn.addEventListener("click",()=>{const id=btn.dataset.songTask;const box=$("songTask-"+id);box.className="feedback";box.textContent="Listening mission: escucha el vídeo y anota 3 palabras en inglés que reconozcas. Después, di su significado en español."; }));
-}
-$("songSearch").addEventListener("input",renderSongs);$("songFilter").addEventListener("change",renderSongs);renderSongs();
-    const games=[
-{id:"vocab",icon:"🪐",title:"Word Galaxy",level:"basic",desc:"Elige el significado correcto de una palabra en inglés.",type:"quiz"},
-{id:"fill",icon:"✨",title:"Complete the Planet",level:"basic",desc:"Completa una palabra a la que le faltan letras.",type:"fill"},
-{id:"match",icon:"🔗",title:"Word Match",level:"basic",desc:"Relaciona palabras cotidianas con su significado.",type:"quiz"},
-{id:"sentence",icon:"🚀",title:"Sentence Rocket",level:"medium",desc:"Identifica la oración ordenada correctamente.",type:"quiz"},
-{id:"alien",icon:"👽",title:"Alien Quiz",level:"medium",desc:"Responde preguntas rápidas de vocabulario y gramática.",type:"quiz"},
-{id:"memory",icon:"🌙",title:"Memory Moon",level:"basic",desc:"Memoriza pares de palabras y significados.",type:"memory"},
-{id:"scramble",icon:"🔤",title:"Star Scramble",level:"medium",desc:"Ordena las letras para descubrir la palabra.",type:"scramble"},
-{id:"challenge",icon:"🌌",title:"Galaxy Challenge",level:"high",desc:"Mezcla de vocabulario y estructuras.",type:"quiz"},
-{id:"listen",icon:"🎧",title:"Listen & Choose",level:"basic",desc:"Practica pronunciación con palabras leídas por el navegador.",type:"listen"},
-{id:"final",icon:"🏆",title:"Final Mission",level:"high",desc:"Un reto final con preguntas de diferentes temas.",type:"quiz"}
-];
-const bank={
-vocab:[{q:'What does "apple" mean?',a:["Manzana","Naranja","Pera","Uva"],c:0,e:"Apple significa manzana."},{q:'What does "window" mean?',a:["Puerta","Ventana","Mesa","Silla"],c:1,e:"Window significa ventana."},{q:'What does "happy" mean?',a:["Cansado/a","Enojado/a","Feliz","Triste"],c:2,e:"Happy significa feliz."}],
-match:[{q:'Choose the correct match for "book".',a:["Libro","Cocina","Zapato","Nube"],c:0,e:"Book significa libro."},{q:'Choose the correct match for "teacher".',a:["Estudiante","Docente","Médico/a","Vecino/a"],c:1,e:"Teacher significa docente o profesor/a."},{q:'Choose the correct match for "water".',a:["Leche","Jugo","Agua","Pan"],c:2,e:"Water significa agua."}],
-sentence:[{q:"Choose the correctly ordered sentence.",a:["Every day school goes she.","She goes to school every day.","Goes she every day school.","She to school every day go."],c:1,e:"En presente simple, con she/he/it el verbo suele añadir -s."},{q:"Choose the correct question.",a:["You are how?","How you are?","How are you?","How is you?"],c:2,e:"La forma correcta es How are you?"},{q:"Choose the correct sentence.",a:["They are playing outside.","They playing are outside.","Are they play outside.","They is playing outside."],c:0,e:"Con they usamos are + verbo en -ing."}],
-alien:[{q:'Choose the plural of "child".',a:["Childs","Children","Childes","Childrens"],c:1,e:"El plural irregular de child es children."},{q:"Complete: Yesterday, we ___ a film.",a:["watch","watches","watched","watching"],c:2,e:"Yesterday señala pasado; watched es pasado regular."},{q:'What is the opposite of "expensive"?',a:["Cheap","Wide","Loud","Early"],c:0,e:"Expensive significa caro; cheap significa barato."}],
-challenge:[{q:"If I ___ more time, I would travel.",a:["have","had","will have","having"],c:1,e:"En esta estructura hipotética se usa If I had…, I would… ."},{q:'Choose a synonym for "rapid".',a:["Slow","Quick","Quiet","Weak"],c:1,e:"Rapid y quick pueden significar rápido."},{q:"She has lived here ___ 2020.",a:["for","since","during","from"],c:1,e:"Since se usa con el punto de inicio: since 2020."}],
-final:[{q:'What does "borrow" mean?',a:["Prestar algo a alguien","Pedir algo prestado","Comprar","Romper"],c:1,e:"Borrow es recibir algo prestado; lend es prestar."},{q:"Choose the correct form: He ___ finished his homework.",a:["have","has","is","were"],c:1,e:"Con he usamos has."},{q:'Which phrase politely asks for help?',a:["Help me now!","You must help.","Could you help me, please?","I help you?"],c:2,e:"Could you… please? es una forma cortés de pedir ayuda."}]
-};
-const fills=[{q:"Complete the word: B _ O K",a:"book",hint:"Es algo que puedes leer."},{q:"Complete the word: F R I _ N D",a:"friend",hint:"Es una persona que aprecias."},{q:"Complete the word: S C H _ O L",a:"school",hint:"Es un lugar donde estudias."}];
-const scrambles=[{q:"Unscramble: E L P P A",a:"apple",hint:"Una fruta."},{q:"Unscramble: R E T A W",a:"water",hint:"La bebemos para hidratarnos."},{q:"Unscramble: H A T E C R E",a:"teacher",hint:"Una persona que enseña."}];
-let activeGame=null,round=0,gamePoints=0,gameAnswered=false,memoryState={};
-function renderGames(){
- const filter=$("gameLevel").value;
- $("gameGrid").innerHTML=games.filter(g=>filter==="all"||g.level===filter).map(g=>`<article class="card game-card"><div class="icon">${g.icon}</div><span class="pill">${g.level==="basic"?"Básico":g.level==="medium"?"Medio":"Alto"}</span><h3>${g.title}</h3><p>${g.desc}</p><button class="btn primary small" data-game="${g.id}">Iniciar misión →</button></article>`).join("");
- document.querySelectorAll("[data-game]").forEach(b=>b.addEventListener("click",()=>startGame(b.dataset.game)));
-}
-$("gameLevel").addEventListener("change",renderGames);renderGames();
-function startGame(id){activeGame=games.find(g=>g.id===id);round=0;gamePoints=0;gameAnswered=false;memoryState={};$("gameArea").classList.add("visible");$("gameLabel").textContent=activeGame.icon+" "+activeGame.title;$("gameFeedback").textContent="";renderGameRound();$("gameArea").scrollIntoView({behavior:"smooth",block:"start"});}
-function renderGameRound(){
- $("gameScore").textContent="Puntos: "+gamePoints;$("gameFeedback").textContent="";$("gameFeedback").className="feedback";gameAnswered=false;
- const content=$("gameContent");
- if(activeGame.id==="fill"){const item=fills[round%fills.length];content.innerHTML=`<div class="game-question">${item.q}</div><p style="color:var(--muted)">${item.hint}</p><input class="word-input" id="fillAnswer" placeholder="Escribe la palabra en inglés" autocomplete="off"><button class="btn primary" id="checkFill">Comprobar</button>`;$("checkFill").onclick=()=>{if(gameAnswered)return;gameAnswered=true;const ok=$("fillAnswer").value.trim().toLowerCase()===item.a;giveFeedback(ok,ok?"¡Correcto! +10 puntos.":`La respuesta correcta es “${item.a}”.`,ok);};$("fillAnswer").addEventListener("keydown",e=>{if(e.key==="Enter")$("checkFill").click();});return;}
- if(activeGame.id==="scramble"){const item=scrambles[round%scrambles.length];content.innerHTML=`<div class="game-question">${item.q}</div><p style="color:var(--muted)">${item.hint}</p><input class="word-input" id="scrambleAnswer" placeholder="Escribe la palabra correcta" autocomplete="off"><button class="btn primary" id="checkScramble">Comprobar</button>`;$("checkScramble").onclick=()=>{if(gameAnswered)return;gameAnswered=true;const ok=$("scrambleAnswer").value.trim().toLowerCase()===item.a;giveFeedback(ok,ok?"¡Excelente! +10 puntos.":`La palabra era “${item.a}”.`,ok);};$("scrambleAnswer").addEventListener("keydown",e=>{if(e.key==="Enter")$("checkScramble").click();});return;}
- if(activeGame.id==="memory"){const pairs=[["cat","gato"],["sun","sol"],["book","libro"],["blue","azul"]];if(!memoryState.deck){memoryState.deck=pairs.flatMap((p,i)=>[{key:i,text:p[0]},{key:i,text:p[1]}]).sort(()=>Math.random()-.5);memoryState.open=[];memoryState.matched=[];}content.innerHTML=`<div class="game-question">Encuentra las parejas de palabras en inglés y español.</div><div class="answers" id="memoryDeck">${memoryState.deck.map((c,i)=>`<button class="answer" data-memory="${i}">${memoryState.matched.includes(i)? "✓ "+c.text : memoryState.open.includes(i)?c.text:"✦ Carta secreta"}</button>`).join("")}</div><p style="color:var(--muted);margin-top:12px">Parejas encontradas: ${memoryState.matched.length/2} de 4</p>`;document.querySelectorAll("[data-memory]").forEach(b=>b.onclick=()=>memoryPick(Number(b.dataset.memory)));return;}
- if(activeGame.id==="listen"){const words=[{word:"apple",meaning:"manzana"},{word:"friend",meaning:"amigo/a"},{word:"beautiful",meaning:"hermoso/a"}];const item=words[round%words.length];content.innerHTML=`<div class="game-question">Listen and choose the word you hear.</div><button class="btn secondary" id="speakWord">🔊 Escuchar palabra</button><div class="answers" style="margin-top:14px">${words.slice().sort(()=>Math.random()-.5).map(w=>`<button class="answer" data-listen="${w.word}">${w.word}</button>`).join("")}</div><p style="color:var(--muted);margin-top:10px">La voz depende de la disponibilidad de síntesis de voz en tu navegador.</p>`;$("speakWord").onclick=()=>{if(!("speechSynthesis" in window)){setFeedback("Tu navegador no tiene lectura de voz disponible. Puedes continuar leyendo las opciones.",false);return;}speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(item.word);u.lang="en-GB";speechSynthesis.speak(u);};document.querySelectorAll("[data-listen]").forEach(b=>b.onclick=()=>{if(gameAnswered)return;gameAnswered=true;const ok=b.dataset.listen===item.word;giveFeedback(ok,ok?`Correct! ${item.word} means ${item.meaning}.`:`The word was ${item.word} (${item.meaning}).`,ok);});return;}
- let list=bank[activeGame.id]||bank.vocab;const item=list[round%list.length];content.innerHTML=`<div class="game-question">${item.q}</div><div class="answers">${item.a.map((a,i)=>`<button class="answer" data-answer="${i}">${escapeHTML(a)}</button>`).join("")}</div>`;document.querySelectorAll("[data-answer]").forEach(b=>b.onclick=()=>{if(gameAnswered)return;gameAnswered=true;const ok=Number(b.dataset.answer)===item.c;b.classList.add(ok?"correct":"wrong");if(!ok)document.querySelector(`[data-answer="${item.c}"]`).classList.add("correct");giveFeedback(ok,(ok?"¡Muy bien! +10 puntos. ":"Inténtalo de nuevo. ")+item.e,ok);});
-}
-function giveFeedback(ok,text,score){setFeedback(text,ok);if(score)gamePoints+=10;$("gameScore").textContent="Puntos: "+gamePoints;}
-function setFeedback(text,good){$("gameFeedback").textContent=text;$("gameFeedback").className="feedback "+(good?"good":"bad");}
-function memoryPick(i){if(memoryState.matched.includes(i)||memoryState.open.includes(i)||memoryState.open.length===2)return;memoryState.open.push(i);const c=memoryState.deck[i];if(memoryState.open.length===2){const [a,b]=memoryState.open;if(memoryState.deck[a].key===memoryState.deck[b].key){memoryState.matched.push(a,b);gamePoints+=10;$("gameScore").textContent="Puntos: "+gamePoints;memoryState.open=[];}else{const deck=$("memoryDeck");deck.querySelectorAll("[data-memory]").forEach(btn=>btn.disabled=true);setTimeout(()=>{memoryState.open=[];renderGameRound();},800);return;}}renderGameRound();if(memoryState.matched.length===8)setFeedback("¡Misión completada! Encontraste todas las parejas.",true);}
-$("nextGameBtn").addEventListener("click",()=>{round++;renderGameRound();});$("closeGameBtn").addEventListener("click",()=>{$("gameArea").classList.remove("visible");$("juegos").scrollIntoView({behavior:"smooth"});});
-    const grammar=[
-{q:"Choose the correct sentence:",a:["She go to school every day.","She goes to school every day.","She going to school every day."],c:1,e:"Con she en presente simple, el verbo lleva -s: she goes."},
-{q:"Complete: They ___ football now.",a:["play","plays","are playing"],c:2,e:"Now indica una acción en progreso: are playing."},
-{q:"Choose the past form: Yesterday, I ___ my friend.",a:["visited","visit","visits"],c:0,e:"Visited es el pasado regular de visit."},
-{q:"Choose the correct article: It is ___ orange.",a:["a","an","the a"],c:1,e:"Usamos an antes de un sonido vocálico."},
-{q:"Complete: I have lived here ___ five years.",a:["since","for","at"],c:1,e:"For se usa para una duración; since para el punto de inicio."},
-{q:"Choose the polite request:",a:["Open the door!","Could you open the door, please?","You open door?"],c:1,e:"Could you… please? es una petición cortés."}
-];
-let grammarIndex=0,grammarScore=0,grammarAnswered=false;
-function renderGrammar(){const q=grammar[grammarIndex];grammarAnswered=false;$("grammarProgress").textContent=`Pregunta ${grammarIndex+1} de ${grammar.length}`;$("grammarQuestion").textContent=q.q;$("grammarAnswers").innerHTML=q.a.map((a,i)=>`<button class="answer" data-grammar="${i}">${escapeHTML(a)}</button>`).join("");$("grammarFeedback").textContent="";$("grammarFeedback").className="feedback";$("grammarScore").textContent="Puntuación: "+grammarScore;document.querySelectorAll("[data-grammar]").forEach(b=>b.onclick=()=>{if(grammarAnswered)return;grammarAnswered=true;const ok=Number(b.dataset.grammar)===q.c;b.classList.add(ok?"correct":"wrong");if(!ok)$(`[data-grammar="${q.c}"]`).classList.add("correct");if(ok)grammarScore+=10;$("grammarScore").textContent="Puntuación: "+grammarScore;$("grammarFeedback").textContent=(ok?"🎉 Excellent! ":"💫 Sigue practicando. ")+q.e;$("grammarFeedback").className="feedback "+(ok?"good":"bad");});}
-$("grammarNext").addEventListener("click",()=>{grammarIndex=(grammarIndex+1)%grammar.length;renderGrammar();});renderGrammar();
+/* 1. TRIPULACIÓN */
+const crewSection = document.createElement("section");
+crewSection.id = "tripulacion";
+crewSection.innerHTML = `
+  <div class="section-head">
+    <span class="pill">Nuestros exploradores</span>
+    <h2>🌌 La tripulación de TaSeVerse</h2>
+    <p>Cinco compañeros, cinco habilidades y una misión compartida:
+    explorar el universo del inglés.</p>
+  </div>
+  <div class="grid">
+    <article class="card">
+      <div class="icon">🐻‍❄️</div>
+      <h3>Roxi · Osa polar</h3>
+      <p>Guía de la tripulación. Orienta al equipo y ayuda a mantener
+      el rumbo durante cada aventura.</p>
+      <span class="pill">Guía y liderazgo</span>
+    </article>
+    <article class="card">
+      <div class="icon">🐈‍⬛</div>
+      <h3>Asher · Gata</h3>
+      <p>Se encarga de la comunicación y aporta creatividad para
+      encontrar nuevas formas de resolver los desafíos.</p>
+      <span class="pill">Comunicación y creatividad</span>
+    </article>
+    <article class="card">
+      <div class="icon">🦁</div>
+      <h3>Toto · León</h3>
+      <p>Explorador de la tripulación. Se atreve a descubrir nuevos
+      lugares y motiva al equipo a avanzar.</p>
+      <span class="pill">Exploración y valentía</span>
+    </article>
+    <article class="card">
+      <div class="icon">🐆</div>
+      <h3>Fendirson · Leopardo</h3>
+      <p>Protege a sus compañeros y permanece atento a los riesgos
+      que puedan aparecer durante las misiones.</p>
+      <span class="pill">Protección y seguridad</span>
+    </article>
+    <article class="card">
+      <div class="icon">🐅</div>
+      <h3>Nunu · Tigresa</h3>
+      <p>Estratega del equipo. Destaca por su rapidez mental,
+      su lógica y su capacidad para resolver problemas.</p>
+      <span class="pill">Estrategia y lógica</span>
+    </article>
+  </div>
+`;
+document.querySelector("#explora").before(crewSection);
 
-const stories=[
-{title:"🌟 The Little Star",level:"Beginner",summary:"Una pequeña estrella se atreve a explorar el universo.",en:"Once upon a time, there was a little star named Stella. Every night, she looked at Earth and dreamed of visiting it. One evening, she met the Moon. “You can explore the universe,” said the Moon, “one small step at a time.” Stella travelled past bright planets and learned new words from every friend she met. She discovered that learning a language was also a journey: it took curiosity, practice, and courage. When she returned home, her light shone brighter than ever.",es:"Había una vez una pequeña estrella llamada Stella. Cada noche miraba la Tierra y soñaba con visitarla. Una tarde conoció a la Luna. «Puedes explorar el universo», le dijo la Luna, «un pequeño paso a la vez». Stella viajó junto a planetas brillantes y aprendió palabras nuevas de cada amistad. Descubrió que aprender un idioma también era un viaje: requería curiosidad, práctica y valentía. Cuando regresó a casa, su luz brillaba más que nunca.",q:"What helped Stella learn new words?",a:["Her curiosity and the friends she met","A magic book only","She never practised"],c:0},
-{title:"🎒 The Craziest Day of Our Vacation",level:"Intermediate",summary:"Un paseo de vacaciones se convierte en una aventura inesperada.",en:"Mia and Leo were excited about their family vacation. On the first morning, they missed the bus and had to follow a narrow path through a village. They met a friendly farmer whose goat had escaped. The children helped him find it, but the goat ran straight into a little café! Everyone laughed as the goat stole a paper map and dashed outside. Mia and Leo finally caught it near the river. They missed their planned tour, yet they discovered a beautiful place and made a new friend. “This is the craziest day of our vacation,” Leo said, smiling.",es:"Mia y Leo estaban emocionados por sus vacaciones familiares. La primera mañana perdieron el autobús y tuvieron que seguir un sendero estrecho por un pueblo. Conocieron a un granjero amable cuya cabra se había escapado. Los niños lo ayudaron a buscarla, ¡pero la cabra entró corriendo a una pequeña cafetería! Todos se rieron cuando el animal robó un mapa de papel y salió disparado. Mia y Leo finalmente la alcanzaron cerca del río. Perdieron el recorrido que habían planeado, pero descubrieron un lugar hermoso e hicieron un nuevo amigo. «Este es el día más loco de nuestras vacaciones», dijo Leo sonriendo.",q:"Why did Mia and Leo miss their planned tour?",a:["They helped find the farmer’s goat","They forgot their passports","The café was closed"],c:0},
-{title:"🐈 The Cat Who Wanted to Learn English",level:"Beginner",summary:"Un gato curioso descubre que las palabras pueden abrir puertas.",en:"Oliver was a curious cat who lived in a small bookshop. Every afternoon, he listened to children practising English. He learned to say “hello,” “please,” and “thank you.” One rainy day, a visitor came into the shop and looked lost. Oliver walked to the door and meowed. The visitor smiled and said, “Thank you, little friend!” Oliver felt proud. He understood that communication was not about knowing every word; it was about trying, listening, and being kind.",es:"Oliver era un gato curioso que vivía en una pequeña librería. Cada tarde escuchaba a los niños practicar inglés. Aprendió a decir «hola», «por favor» y «gracias». Un día lluvioso, una visitante entró a la librería y parecía perdida. Oliver caminó hasta la puerta y maulló. La visitante sonrió y dijo: «¡Gracias, pequeño amigo!». Oliver se sintió orgulloso. Comprendió que comunicarse no consistía en conocer todas las palabras, sino en intentarlo, escuchar y ser amable.",q:"What did Oliver learn about communication?",a:["You must know every word","Trying, listening, and kindness matter","Cats cannot help anyone"],c:1},
-{title:"🌈 The Secret of Rainbow Island",level:"Intermediate",summary:"Dos amigos siguen pistas para descubrir un secreto.",en:"After a storm, Ana and Sam noticed a rainbow reaching across the sea. They followed an old map to a small island. Near a palm tree, they found a message: “The greatest treasure grows when it is shared.” They searched the beach and discovered a box full of seeds. Instead of keeping it, they gave the seeds to the islanders, who planted a colourful garden. Months later, the island was full of flowers, and everyone enjoyed the beautiful view together.",es:"Después de una tormenta, Ana y Sam vieron un arcoíris que cruzaba el mar. Siguieron un mapa antiguo hasta una pequeña isla. Cerca de una palmera encontraron un mensaje: «El mayor tesoro crece cuando se comparte». Buscaron en la playa y descubrieron una caja llena de semillas. En lugar de guardarlas, se las dieron a los habitantes de la isla, quienes plantaron un jardín colorido. Meses después, la isla estaba llena de flores y todos disfrutaban juntos de la hermosa vista.",q:"What was inside the box?",a:["Gold coins","Seeds","A new map"],c:1}
+const crewNav = document.querySelector("#navlinks");
+if (crewNav && !crewNav.querySelector('a[href="#tripulacion"]')) {
+  const li = document.createElement("li");
+  li.innerHTML = '<a href="#tripulacion">Tripulación</a>';
+  crewNav.insertBefore(li, crewNav.children[2] || null);
+}
+
+/* 2. NUEVAS CANCIONES
+   Se conservan las 19 canciones que ya estaban. */
+songs.push(
+  {id:"UyqnRW-CZs4",title:"New Song 20 · Explore English",category:"playlist",note:"Nuevo recurso musical para practicar listening"},
+  {id:"y2joDOunHBo",title:"New Song 21 · Explore English",category:"playlist",note:"Escucha y reconoce expresiones"},
+  {id:"XpoVbmx1qYU",title:"New Song 22 · Explore English",category:"playlist",note:"Práctica auditiva en inglés"},
+  {id:"tdddPxov7fE",title:"New Song 23 · Explore English",category:"playlist",note:"Escucha activa y vocabulario"},
+  {id:"bVCKj0T9-gc",title:"New Song 24 · Explore English",category:"playlist",note:"Un nuevo enlace para explorar"},
+  {id:"-jieCxKqPk0",title:"New Song 25 · Explore English",category:"playlist",note:"Practica palabras y expresiones"},
+  {id:"fDIwLUWYFvs",title:"New Song 26 · Explore English",category:"playlist",note:"Recurso musical complementario"},
+  {id:"mfReSbQ7jzE",title:"New Song 27 · Explore English",category:"playlist",note:"Escucha y aprende a tu ritmo"},
+  {id:"cN2IuhhXitA",title:"New Song 28 · Explore English",category:"playlist",note:"Una nueva aventura musical"}
+);
+renderSongs();
+
+/* 3. DIECISÉIS CUENTOS NUEVOS
+   La página original ya tiene cuatro cuentos.
+   Estos dieciséis completan la colección de veinte. */
+stories.push(
+{
+ title:"Toto and the Zero-Gravity Match",
+ level:"Beginner",
+ summary:"Toto descubre que jugar fútbol en el espacio es un reto.",
+ en:"Toto loved football. One day, his team visited a planet with no gravity. The ball floated above their heads, and every kick sent it spinning into space. At first, nobody could score. Toto suggested passing the ball slowly and working together. Soon, the team learned to control the game. They scored a goal and celebrated in the air.",
+ es:"A Toto le encantaba el fútbol. Un día, su equipo visitó un planeta sin gravedad. El balón flotaba sobre sus cabezas y cada patada lo enviaba girando al espacio. Al principio, nadie podía anotar. Toto propuso pasar el balón despacio y trabajar juntos. Pronto aprendieron a controlar el juego, anotaron un gol y celebraron en el aire.",
+ q:"What helped Toto's team succeed?",
+ a:["Working together","Playing alone","Leaving the planet"],
+ c:0
+},
+{
+ title:"Asher's Digital Dream",
+ level:"Intermediate",
+ summary:"Asher explora una ciudad digital donde cada palabra es una pista.",
+ en:"Asher found an old computer on a space station. When she turned it on, a digital city appeared. Every sign changed language when she touched it. At first, she felt confused. Then she read the signs aloud, wrote new words in her notebook and tested their meanings. The city became easier to understand. Asher woke up and realised that curiosity was her best learning tool.",
+ es:"Asher encontró un computador antiguo en una estación espacial. Al encenderlo, apareció una ciudad digital. Cada letrero cambiaba de idioma cuando ella lo tocaba. Al principio se sintió confundida. Después leyó los letreros en voz alta, anotó palabras nuevas y comprobó sus significados. La ciudad se volvió más fácil de comprender. Asher despertó y descubrió que la curiosidad era su mejor herramienta para aprender.",
+ q:"What helped Asher understand the digital city?",
+ a:["Ignoring the signs","Reading and practising new words","Turning off the computer"],
+ c:1
+},
+{
+ title:"Nunu and the Impossible Equation",
+ level:"Intermediate",
+ summary:"Nunu y sus amigos resuelven un acertijo para abrir una puerta.",
+ en:"Nunu discovered a strange equation on a laboratory door. It would open only when someone solved the puzzle in English. She read every clue carefully, but the answer was not obvious. Roxi noticed a pattern, and Asher translated the final clue. Together, they solved the equation. Behind the door, they found a library full of books from distant planets.",
+ es:"Nunu descubrió una ecuación extraña en la puerta de un laboratorio. Solo se abriría si alguien resolvía el acertijo en inglés. Leyó cada pista con atención, pero la respuesta no era evidente. Roxi encontró un patrón y Asher tradujo la última pista. Juntas resolvieron la ecuación. Detrás de la puerta encontraron una biblioteca llena de libros de planetas lejanos.",
+ q:"How did the team solve the puzzle?",
+ a:["By cooperating","By breaking the door","By ignoring the clues"],
+ c:0
+},
+{
+ title:"Fendirson's Last Patrol",
+ level:"Advanced",
+ summary:"Fendirson protege una colonia cuando falla el sistema de comunicación.",
+ en:"Fendirson was guarding a distant colony when the communication system suddenly failed. An alarm echoed through the corridors. He checked each station and discovered that a meteor shower had damaged the antenna. He organised the crew and sent a repair team outside. After a difficult night, communication returned. Fendirson understood that courage meant protecting others even when a situation was frightening.",
+ es:"Fendirson vigilaba una colonia lejana cuando el sistema de comunicación falló de repente. Una alarma resonó por los pasillos. Revisó cada estación y descubrió que una lluvia de meteoritos había dañado la antena. Organizó a la tripulación y envió un equipo a repararla. Después de una noche difícil, volvió la comunicación. Fendirson comprendió que ser valiente significaba proteger a los demás incluso en situaciones aterradoras.",
+ q:"What damaged the antenna?",
+ a:["A meteor shower","A football match","A broken book"],
+ c:0
+},
+{
+ title:"Roxi and the Map of Forgotten Words",
+ level:"Beginner",
+ summary:"Roxi convierte un mapa misterioso en una aventura de vocabulario.",
+ en:"Roxi found a map with five islands, but their names were missing. On the first island, she saw a blue bird. She wrote bird on the map. On the next island, she found a tree, a river and a little house. She named each object in English. At the end of the journey, the map was full of words, and Roxi had learned many new things.",
+ es:"Roxi encontró un mapa con cinco islas, pero sus nombres habían desaparecido. En la primera isla vio un pájaro azul y escribió bird en el mapa. En la siguiente encontró un árbol, un río y una casita. Nombró cada objeto en inglés. Al final del viaje, el mapa estaba lleno de palabras y Roxi había aprendido muchas cosas nuevas.",
+ q:"What did Roxi write on the map?",
+ a:["English words","Numbers only","Her favourite songs"],
+ c:0
+},
+{
+ title:"The Moonlight Library",
+ level:"Beginner",
+ summary:"Una biblioteca lunar ayuda a una viajera a aprender cada día.",
+ en:"Every evening, a library appeared on the Moon. Asher found a book written in a language she did not know. She studied the pictures, repeated familiar sentences and used a small dictionary. Each page became easier. Before leaving, she borrowed the book and promised to read a little every day. She discovered that regular practice could open many doors.",
+ es:"Cada tarde aparecía una biblioteca en la Luna. Asher encontró un libro escrito en un idioma que no conocía. Estudió las imágenes, repitió frases conocidas y utilizó un pequeño diccionario. Cada página se volvió más fácil. Antes de irse, pidió prestado el libro y prometió leer un poco cada día. Descubrió que practicar con regularidad podía abrir muchas puertas.",
+ q:"What did Asher promise to do?",
+ a:["Read every day","Forget the book","Stop learning"],
+ c:0
+},
+{
+ title:"The Robot Who Wanted a Friend",
+ level:"Beginner",
+ summary:"Un robot descubre que la amistad puede empezar con un saludo.",
+ en:"A small robot lived alone on a quiet planet. He could count stars and repair machines, but he did not know how to make friends. One day, a girl landed near his house. The robot asked, “Hello! Would you like to play?” They built a tower and drew pictures together. The robot learned that friendship could begin with a kind word.",
+ es:"Un pequeño robot vivía solo en un planeta tranquilo. Sabía contar estrellas y reparar máquinas, pero no sabía cómo hacer amigos. Un día, una niña aterrizó cerca de su casa. El robot preguntó: «¡Hola! ¿Te gustaría jugar?». Construyeron una torre e hicieron dibujos juntos. El robot aprendió que la amistad podía comenzar con una palabra amable.",
+ q:"How did the robot begin a friendship?",
+ a:["He greeted the girl","He hid in his house","He turned off his lights"],
+ c:0
+},
+{
+ title:"A Message from the Ocean",
+ level:"Intermediate",
+ summary:"Un mensaje submarino inspira a los estudiantes a cuidar el océano.",
+ en:"A group of students received a message from an underwater research station. The scientists needed help identifying sea animals. The students researched dolphins, turtles and fish. They also learned how plastic affected marine life. Their class organised a clean-up day and invited families to participate. The message became more than a school task: it inspired them to protect the ocean.",
+ es:"Un grupo de estudiantes recibió un mensaje de una estación de investigación submarina. Los científicos necesitaban ayuda para identificar animales marinos. Los estudiantes investigaron sobre delfines, tortugas y peces. También aprendieron cómo afectaba el plástico a la vida marina. Su clase organizó una jornada de limpieza e invitó a las familias. El mensaje se convirtió en algo más que una tarea: los inspiró a proteger el océano.",
+ q:"What did the students organise?",
+ a:["A clean-up day","A space race","A cooking contest"],
+ c:0
+},
+{
+ title:"The Secret of the Blue Planet",
+ level:"Intermediate",
+ summary:"La tripulación aprende a comunicarse mediante música.",
+ en:"The crew arrived on a planet covered by blue forests. Its inhabitants communicated through music. At first, the visitors could not understand them. Asher listened to the rhythm, and Toto noticed that each melody expressed an emotion. The crew answered with simple musical patterns. Slowly, a conversation developed. Before leaving, they exchanged songs and learned to respect another culture.",
+ es:"La tripulación llegó a un planeta cubierto de bosques azules. Sus habitantes se comunicaban mediante la música. Al principio, los visitantes no podían comprenderlos. Asher escuchó el ritmo y Toto notó que cada melodía expresaba una emoción. La tripulación respondió con patrones musicales sencillos. Poco a poco surgió una conversación. Antes de partir, intercambiaron canciones y aprendieron a respetar otra cultura.",
+ q:"How did the inhabitants communicate?",
+ a:["Through music","Through football","Through written numbers"],
+ c:0
+},
+{
+ title:"The Day the Words Disappeared",
+ level:"Beginner",
+ summary:"Los niños reconstruyen los letreros de un pueblo usando palabras en inglés.",
+ en:"One morning, every word disappeared from the town signs. Nobody could read the bus map or find the bakery. Nunu suggested collecting the missing words. The children wrote the names of places, foods and objects in English. They placed the words on new signs around town. By sunset, everyone could find their way again.",
+ es:"Una mañana, todas las palabras desaparecieron de los letreros del pueblo. Nadie podía leer el mapa del autobús ni encontrar la panadería. Nunu propuso reunir las palabras perdidas. Los niños escribieron los nombres de lugares, alimentos y objetos en inglés. Colocaron las palabras en nuevos letreros. Al atardecer, todos podían orientarse otra vez.",
+ q:"What did the children create?",
+ a:["New signs","A spaceship","A new ocean"],
+ c:0
+},
+{
+ title:"Roxi's First Speech in English",
+ level:"Intermediate",
+ summary:"Roxi aprende que hablar bien no significa hablar sin errores.",
+ en:"Roxi had to welcome visitors from another planet. She prepared a speech, but she forgot the first sentence when she saw the audience. Her friends encouraged her to breathe and begin again. Roxi spoke about friendship and learning together. She made a few mistakes, but the visitors understood her message and applauded. She learned that speaking required courage, not perfection.",
+ es:"Roxi debía dar la bienvenida a visitantes de otro planeta. Preparó un discurso, pero olvidó la primera frase al ver al público. Sus amigos la animaron a respirar y comenzar de nuevo. Roxi habló sobre la amistad y el aprendizaje conjunto. Cometió algunos errores, pero los visitantes entendieron su mensaje y aplaudieron. Aprendió que hablar requería valentía, no perfección.",
+ q:"What did Roxi learn?",
+ a:["Speaking requires courage","Mistakes are forbidden","She should never speak"],
+ c:0
+},
+{
+ title:"The Football Final in Space",
+ level:"Intermediate",
+ summary:"Toto descubre que la comunicación hace más fuerte a su equipo.",
+ en:"Toto's team reached the final of the Interplanetary Football Cup. Their opponents were faster, and the first half ended without a goal. During the break, Toto reminded everyone to communicate and trust one another. In the second half, they passed the ball carefully and scored the winning goal. Toto celebrated the teamwork more than the trophy.",
+ es:"El equipo de Toto llegó a la final de la Copa Interplanetaria de Fútbol. Sus oponentes eran más rápidos y el primer tiempo terminó sin goles. Durante el descanso, Toto recordó a todos que debían comunicarse y confiar entre sí. En el segundo tiempo pasaron el balón con cuidado y anotaron el gol ganador. Toto celebró el trabajo en equipo más que el trofeo.",
+ q:"What did Toto value most?",
+ a:["Teamwork","The colour of the ball","Playing alone"],
+ c:0
+},
+{
+ title:"The Forest That Remembered",
+ level:"Advanced",
+ summary:"Fendirson encuentra una lección de valentía y bondad en un bosque misterioso.",
+ en:"Fendirson entered a forest where the trees remembered every traveller. When he touched a branch, he heard stories about kindness and bravery. The forest was preserving lessons, not judging anyone. He found a young tree damaged by a storm and carefully supported it. As he left, the trees whispered his name. He decided to leave every place better than he found it.",
+ es:"Fendirson entró en un bosque donde los árboles recordaban a cada viajero. Cuando tocó una rama, escuchó historias de bondad y valentía. El bosque conservaba lecciones, no juzgaba a nadie. Encontró un árbol joven dañado por una tormenta y lo sostuvo con cuidado. Al marcharse, los árboles susurraron su nombre. Decidió dejar cada lugar mejor de como lo había encontrado.",
+ q:"What did Fendirson do for the young tree?",
+ a:["He supported it","He cut it down","He ignored it"],
+ c:0
+},
+{
+ title:"Nunu's Race Against Time",
+ level:"Intermediate",
+ summary:"Nunu resuelve un problema antes de que la estación pierda energía.",
+ en:"A countdown appeared on the control panel: ten minutes until the station lost power. Nunu examined the system and found a damaged energy cell. Her friends brought the tools while she followed the repair instructions. With only seconds remaining, the lights returned. Nunu explained how she had solved the problem. She learned that clear thinking and communication were as important as speed.",
+ es:"Una cuenta regresiva apareció en el panel de control: faltaban diez minutos para que la estación perdiera energía. Nunu examinó el sistema y encontró una celda energética dañada. Sus amigos trajeron las herramientas mientras ella seguía las instrucciones de reparación. Cuando quedaban solo segundos, las luces regresaron. Nunu explicó cómo había resuelto el problema. Aprendió que pensar con claridad y comunicarse era tan importante como la rapidez.",
+ q:"What problem did Nunu find?",
+ a:["A damaged energy cell","A missing book","A broken football"],
+ c:0
+},
+{
+ title:"The Last Starship Home",
+ level:"Advanced",
+ summary:"La tripulación une sus habilidades para encontrar el camino de regreso.",
+ en:"After months of exploration, the crew began the journey home. Cosmic dust damaged the navigation system, and their route vanished from the screen. Roxi organised the search, Asher restored communication, Toto piloted carefully, Fendirson secured the damaged section and Nunu recalculated their course. Their different strengths became their greatest advantage. When Earth appeared through the window, they knew they had succeeded together.",
+ es:"Después de meses de exploración, la tripulación inició el viaje de regreso. El polvo cósmico dañó el sistema de navegación y la ruta desapareció de la pantalla. Roxi organizó la búsqueda, Asher restableció la comunicación, Toto pilotó con cuidado, Fendirson aseguró la sección dañada y Nunu recalculó el rumbo. Sus diferentes habilidades se convirtieron en su mayor ventaja. Cuando la Tierra apareció por la ventana, supieron que lo habían logrado juntos.",
+ q:"Why did the crew succeed?",
+ a:["They combined their skills","They ignored the problem","They travelled without a plan"],
+ c:0
+},
+{
+ title:"The Festival of a Thousand Voices",
+ level:"Advanced",
+ summary:"La tripulación descubre cómo escuchar ayuda a superar las diferencias culturales.",
+ en:"The crew arrived at a festival where visitors shared stories, songs and traditions. At first, misunderstandings interrupted several conversations. Instead of leaving, the crew listened carefully, asked questions and invited others to explain unfamiliar customs. By the end of the evening, they had discovered common hopes beneath different expressions. They returned to their ship with new friendships and a deeper understanding of communication.",
+ es:"La tripulación llegó a un festival donde los visitantes compartían historias, canciones y tradiciones. Al principio, los malentendidos interrumpieron varias conversaciones. En lugar de marcharse, la tripulación escuchó con atención, hizo preguntas e invitó a los demás a explicar costumbres desconocidas. Al final de la tarde, descubrieron esperanzas comunes detrás de distintas expresiones. Regresaron a su nave con nuevas amistades y una comprensión más profunda de la comunicación.",
+ q:"How did the crew handle misunderstandings?",
+ a:["They listened and asked questions","They refused to talk","They left immediately"],
+ c:0
+}
+);
+
+/* 4. DIEZ JUEGOS ADICIONALES */
+const extraGames = [
+ {id:"laserHunter",icon:"🔦",title:"Laser Word Hunter",level:"basic",desc:"Encuentra el significado de palabras en inglés."},
+ {id:"wordPortal",icon:"🌀",title:"Portal de palabras",level:"basic",desc:"Cruza el portal eligiendo la traducción correcta."},
+ {id:"memoryGalaxy",icon:"🧠",title:"Memoria galáctica",level:"basic",desc:"Practica vocabulario con preguntas de memoria."},
+ {id:"emergencyTranslator",icon:"🛸",title:"Traductor de emergencia",level:"medium",desc:"Traduce expresiones para completar la misión."},
+ {id:"grammarDetective",icon:"🔍",title:"Detective gramatical",level:"medium",desc:"Identifica la estructura correcta."},
+ {id:"sentenceBuilder",icon:"🧱",title:"Constructor de frases",level:"medium",desc:"Reconoce oraciones bien construidas."},
+ {id:"listeningRadar",icon:"🎧",title:"Radar de listening",level:"basic",desc:"Practica vocabulario y comprensión auditiva."},
+ {id:"survivalMission",icon:"🚀",title:"Misión de supervivencia",level:"high",desc:"Resuelve desafíos para regresar a la base."},
+ {id:"letterRain",icon:"☄️",title:"Lluvia de letras",level:"basic",desc:"Descubre palabras a partir de pistas."},
+ {id:"expressionNebula",icon:"🌌",title:"Nebulosa de expresiones",level:"medium",desc:"Escoge la expresión adecuada para cada situación."}
 ];
-function renderStories(){$("storyList").innerHTML=stories.map((s,i)=>`<article class="card story-card"><span class="pill">${s.level}</span><h3>${s.title}</h3><p>${s.summary}</p><div class="actions" style="justify-content:flex-start"><button class="btn primary small" data-story="${i}">Leer cuento</button></div><div class="story-body" id="story-${i}"><p>${s.en}</p><p class="translation">${s.es}</p><h4 style="margin-top:14px">📚 Comprehension check</h4><p>${s.q}</p><div class="answers">${s.a.map((a,j)=>`<button class="answer" data-story-answer="${i}-${j}">${escapeHTML(a)}</button>`).join("")}</div><p class="feedback" id="storyFeedback-${i}"></p></div></article>`).join("");document.querySelectorAll("[data-story]").forEach(b=>b.onclick=()=>{$("story-"+b.dataset.story).classList.toggle("open");b.textContent=$("story-"+b.dataset.story).classList.contains("open")?"Ocultar cuento":"Leer cuento";});document.querySelectorAll("[data-story-answer]").forEach(b=>b.onclick=()=>{const [si,ai]=b.dataset.storyAnswer.split("-").map(Number);const s=stories[si],fb=$("storyFeedback-"+si);fb.textContent=ai===s.c?"🎉 Correct! Great reading!":"Not quite. Read the story again and try once more.";fb.className="feedback "+(ai===s.c?"good":"bad");});}
+
+games.push(...extraGames);
+
+const extraQuestions = [
+ {q:'What does "brave" mean?',a:["Valiente","Triste","Pequeño","Lento"],c:0,e:"Brave significa valiente."},
+ {q:'What does "cloud" mean?',a:["Nube","Libro","Ventana","Río"],c:0,e:"Cloud significa nube."},
+ {q:'What does "together" mean?',a:["Juntos","Lejos","Nunca","Pronto"],c:0,e:"Together significa juntos."},
+ {q:"Choose the correct sentence.",a:["She play football.","She plays football.","She playing football.","She are play football."],c:1,e:"Con she en present simple se usa plays."},
+ {q:"Complete: Yesterday, we ___ to school.",a:["go","goes","went","going"],c:2,e:"Went es el pasado de go."},
+ {q:"Complete: There ___ five stars.",a:["is","are","am","be"],c:1,e:"There are se utiliza con sustantivos plurales."},
+ {q:'What does "protect" mean?',a:["Proteger","Olvidar","Vender","Dormir"],c:0,e:"Protect significa proteger."},
+ {q:"Choose a polite request.",a:["Help me now!","Could you help me, please?","You help me?","Must help."],c:1,e:"Could you… please? es una petición cortés."},
+ {q:"Complete: I ___ learning English.",a:["am","is","are","be"],c:0,e:"Con I se usa am."},
+ {q:'What does "curiosity" mean?',a:["Curiosidad","Velocidad","Silencio","Oscuridad"],c:0,e:"Curiosity significa curiosidad."}
+];
+
+for (const game of extraGames) {
+  bank[game.id] = extraQuestions;
+}
+
+/* Actualizar las tarjetas de juegos y cuentos con los nuevos recursos. */
+renderGames();
 renderStories();
 
-const modal=$("modal");let modalTarget="#juegos";
-function openModal(title,body,target){$("modalTitle").textContent=title;$("modalBody").innerHTML=body;modalTarget=target||"#juegos";modal.classList.add("open");}
-function closeModal(){modal.classList.remove("open");}
-$("modalClose").onclick=closeModal;$("modalCancel").onclick=closeModal;modal.addEventListener("click",e=>{if(e.target===modal)closeModal();});document.addEventListener("keydown",e=>{if(e.key==="Escape")closeModal();});$("modalAction").onclick=()=>{closeModal();document.querySelector(modalTarget)?.scrollIntoView({behavior:"smooth"});};
-document.querySelectorAll("[data-level]").forEach(b=>b.addEventListener("click",()=>{const level=b.dataset.level;const names={basic:"Básico · A1–A2",medium:"Medio · B1–B2",high:"Alto · C1+"};$("gameLevel").value=level;renderGames();openModal("Tu ruta: "+names[level],`<p>¡Tu aventura comienza ahora! Hemos seleccionado actividades de nivel ${names[level]}.</p><p>Empieza con una misión, practica la gramática y explora las canciones y los cuentos para seguir avanzando.</p>`,"#juegos");}));
+console.log("TaSeVerse actualizado: 20 cuentos, 28 canciones y 20 juegos.");
 </script>
-</body>
-</html>
