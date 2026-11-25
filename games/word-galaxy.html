@@ -1,0 +1,631 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Word Galaxy | TaSeVerse</title>
+<style>
+:root {
+  --bg: #050718;
+  --panel: rgba(18, 27, 65, .88);
+  --purple: #a77aff;
+  --cyan: #54e8ff;
+  --pink: #ff75c8;
+  --white: #f8f7ff;
+  --muted: #b9c0df;
+  --line: rgba(174,190,255,.2);
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  min-height: 100vh;
+  color: var(--white);
+  font-family: 'Segoe UI', Arial, sans-serif;
+  background:
+    linear-gradient(rgba(5,7,24,.86),rgba(5,7,24,.94)),
+    url("../assets/space-background.png") center/cover fixed,
+    var(--bg);
+  overflow-x: hidden;
+}
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(circle at 15% 20%,rgba(92,83,255,.2),transparent 28%),
+    radial-gradient(circle at 85% 70%,rgba(207,91,255,.16),transparent 30%);
+  z-index: -1;
+}
+button, select { font: inherit; }
+button { cursor: pointer; }
+a { text-decoration: none; color: inherit; }
+
+.nav {
+  padding: 17px 6%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid var(--line);
+  background: rgba(5,7,24,.82);
+  backdrop-filter: blur(15px);
+}
+.logo {
+  font-size: 1.45rem;
+  font-weight: 900;
+  letter-spacing: 1px;
+}
+.logo span { color: var(--cyan); }
+.back {
+  color: var(--muted);
+  font-size: .9rem;
+  font-weight: 600;
+}
+.back:hover { color: var(--cyan); }
+
+main {
+  width: min(1120px, 92%);
+  margin: auto;
+  padding: 38px 0 65px;
+}
+.intro { text-align: center; margin-bottom: 30px; }
+.eyebrow {
+  display: inline-block;
+  color: var(--cyan);
+  border: 1px solid rgba(84,232,255,.3);
+  background: rgba(84,232,255,.07);
+  border-radius: 30px;
+  padding: 7px 15px;
+  font-size: .75rem;
+  letter-spacing: 2px;
+  font-weight: 800;
+}
+h1 {
+  font-size: clamp(2.2rem,6vw,4rem);
+  margin: 12px 0 5px;
+  line-height: 1.1;
+  background: linear-gradient(90deg,#fff,var(--cyan),var(--purple),var(--pink));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+.intro p { color: var(--muted); font-size: 1rem; }
+
+.panel {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 23px;
+  padding: 23px;
+  box-shadow: 0 20px 60px rgba(0,0,0,.28);
+  backdrop-filter: blur(15px);
+}
+.setup {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 15px;
+  flex-wrap: wrap;
+  margin-bottom: 18px;
+}
+.setup label { color: var(--muted); font-size: .88rem; }
+select {
+  background: #111b42;
+  color: white;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 10px 13px;
+  outline: none;
+}
+.stats {
+  display: grid;
+  grid-template-columns: repeat(3,1fr);
+  gap: 12px;
+  margin-bottom: 20px;
+}
+.stat {
+  background: rgba(255,255,255,.045);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 12px;
+  text-align: center;
+}
+.stat small {
+  display: block;
+  color: var(--muted);
+  font-size: .72rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+.stat strong { font-size: 1.35rem; color: var(--cyan); }
+
+.game-layout {
+  display: grid;
+  grid-template-columns: minmax(0,1fr) 230px;
+  gap: 22px;
+  align-items: start;
+}
+.grid-wrap {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px 0;
+}
+.grid {
+  display: grid;
+  gap: 4px;
+  width: min(100%,510px);
+  user-select: none;
+  touch-action: none;
+}
+.cell {
+  aspect-ratio: 1;
+  min-width: 0;
+  border: 1px solid rgba(174,190,255,.17);
+  border-radius: 7px;
+  background: rgba(69,87,151,.19);
+  color: white;
+  font-size: clamp(.63rem,2vw,1rem);
+  font-weight: 800;
+  display: grid;
+  place-items: center;
+  transition: background .15s, transform .15s;
+  cursor: crosshair;
+}
+.cell.selected {
+  background: rgba(84,232,255,.35);
+  border-color: var(--cyan);
+  color: white;
+  transform: scale(.95);
+}
+.cell.found {
+  background: linear-gradient(135deg,rgba(84,232,255,.42),rgba(167,122,255,.5));
+  border-color: var(--purple);
+  color: white;
+}
+.side h2 { font-size: 1.05rem; margin-bottom: 6px; }
+.side p { color: var(--muted); font-size: .82rem; margin-bottom: 15px; }
+.words {
+  display: grid;
+  gap: 9px;
+}
+.word {
+  padding: 9px 11px;
+  border-radius: 9px;
+  background: rgba(255,255,255,.045);
+  border: 1px solid var(--line);
+  font-size: .83rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+  color: var(--white);
+}
+.word.done {
+  color: var(--cyan);
+  text-decoration: line-through;
+  opacity: .65;
+  border-color: rgba(84,232,255,.3);
+}
+.hint {
+  margin-top: 17px;
+  padding: 12px;
+  border-radius: 12px;
+  background: rgba(167,122,255,.1);
+  border: 1px solid rgba(167,122,255,.25);
+  color: #d9c7ff;
+  font-size: .8rem;
+  line-height: 1.5;
+}
+.actions {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-top: 22px;
+}
+.btn {
+  border: 0;
+  border-radius: 12px;
+  padding: 12px 19px;
+  font-weight: 800;
+  transition: .2s;
+}
+.btn:hover { transform: translateY(-2px); }
+.primary {
+  color: #071026;
+  background: linear-gradient(100deg,var(--cyan),#a3a2ff);
+  box-shadow: 0 7px 25px rgba(84,232,255,.2);
+}
+.secondary {
+  color: white;
+  background: rgba(255,255,255,.08);
+  border: 1px solid var(--line);
+}
+.message {
+  text-align: center;
+  color: var(--cyan);
+  font-weight: 700;
+  min-height: 25px;
+  margin-top: 15px;
+}
+.complete {
+  display: none;
+  text-align: center;
+  padding: 23px;
+  margin-top: 18px;
+  border-radius: 16px;
+  background: rgba(84,232,255,.09);
+  border: 1px solid rgba(84,232,255,.3);
+}
+.complete h2 { color: var(--cyan); margin-bottom: 7px; }
+.complete p { color: var(--muted); margin-bottom: 14px; }
+
+.footer {
+  text-align: center;
+  color: #8e98c2;
+  font-size: .78rem;
+  padding: 25px 10px;
+}
+@media(max-width:760px) {
+  main { padding-top: 27px; }
+  .game-layout { grid-template-columns: 1fr; }
+  .side { order: -1; }
+  .words { grid-template-columns: repeat(2,1fr); }
+  .panel { padding: 15px; }
+  .grid { gap: 3px; }
+  .cell { border-radius: 5px; }
+}
+@media(max-width:390px) {
+  .stats { gap: 6px; }
+  .stat { padding: 9px 4px; }
+  .stat strong { font-size: 1.1rem; }
+  .cell { font-size: .57rem; }
+}
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <a href="../index.html" class="logo">TaSe<span>Verse</span></a>
+  <a href="../index.html#juegos" class="back">← Back to missions</a>
+</nav>
+
+<main>
+  <header class="intro">
+    <span class="eyebrow">SPACE MISSION 01</span>
+    <h1>Word Galaxy</h1>
+    <p>Explore the galaxy and discover the hidden English words!</p>
+  </header>
+
+  <section class="panel">
+    <div class="setup">
+      <label for="level">Choose your difficulty:</label>
+      <select id="level">
+        <option value="easy">Explorer · Easy</option>
+        <option value="medium">Astronaut · Medium</option>
+        <option value="hard">Commander · Hard</option>
+      </select>
+    </div>
+
+    <div class="stats">
+      <div class="stat">
+        <small>Found words</small>
+        <strong id="score">0 / 6</strong>
+      </div>
+      <div class="stat">
+        <small>Time</small>
+        <strong id="time">00:00</strong>
+      </div>
+      <div class="stat">
+        <small>Points</small>
+        <strong id="points">0</strong>
+      </div>
+    </div>
+
+    <div class="game-layout">
+      <div class="grid-wrap">
+        <div class="grid" id="grid" aria-label="Word search grid"></div>
+      </div>
+      <aside class="side">
+        <h2>✨ Hidden words</h2>
+        <p>Find all the words in the galaxy.</p>
+        <div class="words" id="words"></div>
+        <div class="hint">
+          <strong>Mission tip:</strong><br>
+          Select letters by dragging your mouse or finger in a straight line. Words can appear horizontally, vertically or diagonally.
+        </div>
+      </aside>
+    </div>
+
+    <div class="message" id="message" aria-live="polite">Ready for your mission, astronaut?</div>
+
+    <div class="actions">
+      <button class="btn primary" id="newGame">↻ New mission</button>
+      <button class="btn secondary" id="clearSelection">Clear selection</button>
+    </div>
+
+    <div class="complete" id="complete">
+      <h2>🚀 Mission accomplished!</h2>
+      <p>You discovered every hidden word. Amazing work, astronaut!</p>
+      <button class="btn primary" id="playAgain">Play again</button>
+    </div>
+  </section>
+</main>
+
+<footer class="footer">
+  TaSeVerse · Between notes and stories, a route to authentic English.
+</footer>
+
+<script>
+const puzzles = {
+  easy: ["SPACE","STAR","MOON","PLANET","ROCKET","EARTH"],
+  medium: ["GALAXY","ASTRONAUT","UNIVERSE","COMET","ORBIT","NEBULA"],
+  hard: ["ADVENTURE","DISCOVERY","CONSTELLATION","ASTRONOMY","TELESCOPE","SATELLITE"]
+};
+
+const gridElement = document.getElementById("grid");
+const wordsElement = document.getElementById("words");
+const levelElement = document.getElementById("level");
+const messageElement = document.getElementById("message");
+
+let size = 12;
+let words = [];
+let matrix = [];
+let found = [];
+let selected = [];
+let dragging = false;
+let startCell = null;
+let seconds = 0;
+let timer = null;
+let points = 0;
+let gameOver = false;
+let isPointerDown = false;
+
+const directions = [
+  [0,1],[1,0],[0,-1],[-1,0],
+  [1,1],[1,-1],[-1,1],[-1,-1]
+];
+
+function randomLetter() {
+  return "ABCDEFGHIJKLMNOPQRSTUVWXYZ"[Math.floor(Math.random()*26)];
+}
+
+function createMatrix() {
+  matrix = Array.from({length:size},()=>Array(size).fill(""));
+  const shuffled = [...words].sort((a,b)=>b.length-a.length);
+
+  shuffled.forEach(word=>{
+    let placed = false;
+    let attempts = 0;
+
+    while(!placed && attempts < 1000) {
+      attempts++;
+      const [dr,dc] = directions[Math.floor(Math.random()*directions.length)];
+      const row = Math.floor(Math.random()*size);
+      const col = Math.floor(Math.random()*size);
+      const endRow = row + dr*(word.length-1);
+      const endCol = col + dc*(word.length-1);
+
+      if(endRow<0 || endRow>=size || endCol<0 || endCol>=size) continue;
+
+      let valid = true;
+      for(let i=0;i<word.length;i++) {
+        const existing = matrix[row+dr*i][col+dc*i];
+        if(existing && existing!==word[i]) {
+          valid=false;
+          break;
+        }
+      }
+      if(!valid) continue;
+
+      for(let i=0;i<word.length;i++) {
+        matrix[row+dr*i][col+dc*i] = word[i];
+      }
+      placed=true;
+    }
+  });
+
+  matrix = matrix.map(row=>row.map(letter=>letter||randomLetter()));
+}
+
+function renderGrid() {
+  gridElement.innerHTML="";
+  gridElement.style.gridTemplateColumns=`repeat(${size}, minmax(0,1fr))`;
+
+  matrix.forEach((row,r)=>{
+    row.forEach((letter,c)=>{
+      const cell=document.createElement("button");
+      cell.type="button";
+      cell.className="cell";
+      cell.textContent=letter;
+      cell.dataset.row=r;
+      cell.dataset.col=c;
+      cell.setAttribute("aria-label",`Row ${r+1}, column ${c+1}, ${letter}`);
+      gridElement.appendChild(cell);
+    });
+  });
+}
+
+function renderWords() {
+  wordsElement.innerHTML="";
+  words.forEach(word=>{
+    const item=document.createElement("div");
+    item.className="word";
+    item.id="word-"+word;
+    item.textContent=word;
+    wordsElement.appendChild(item);
+  });
+}
+
+function updateStats() {
+  document.getElementById("score").textContent=`${found.length} / ${words.length}`;
+  document.getElementById("points").textContent=points;
+}
+
+function startTimer() {
+  clearInterval(timer);
+  timer=setInterval(()=>{
+    if(gameOver) return;
+    seconds++;
+    const min=String(Math.floor(seconds/60)).padStart(2,"0");
+    const sec=String(seconds%60).padStart(2,"0");
+    document.getElementById("time").textContent=`${min}:${sec}`;
+  },1000);
+}
+
+function cellAt(row,col) {
+  return gridElement.querySelector(`[data-row="${row}"][data-col="${col}"]`);
+}
+
+function getLine(start,end) {
+  const dr=end.row-start.row;
+  const dc=end.col-start.col;
+  const length=Math.max(Math.abs(dr),Math.abs(dc));
+
+  if(length===0) return [start];
+
+  if(!(dr===0 || dc===0 || Math.abs(dr)===Math.abs(dc))) return [];
+
+  const stepR=Math.sign(dr);
+  const stepC=Math.sign(dc);
+  const result=[];
+
+  for(let i=0;i<=length;i++) {
+    result.push({row:start.row+stepR*i,col:start.col+stepC*i});
+  }
+  return result;
+}
+
+function clearVisualSelection() {
+  gridElement.querySelectorAll(".cell.selected").forEach(cell=>cell.classList.remove("selected"));
+}
+
+function paintSelection() {
+  clearVisualSelection();
+  selected.forEach(pos=>{
+    const cell=cellAt(pos.row,pos.col);
+    if(cell && !cell.classList.contains("found")) cell.classList.add("selected");
+  });
+}
+
+function getCellFromPoint(x,y) {
+  const element=document.elementFromPoint(x,y);
+  const cell=element?.closest(".cell");
+  if(!cell || !gridElement.contains(cell)) return null;
+  return {
+    row:Number(cell.dataset.row),
+    col:Number(cell.dataset.col)
+  };
+}
+
+function beginSelection(pos) {
+  if(gameOver || !pos) return;
+  dragging=true;
+  startCell=pos;
+  selected=[pos];
+  paintSelection();
+}
+
+function moveSelection(pos) {
+  if(!dragging || !pos) return;
+  selected=getLine(startCell,pos);
+  paintSelection();
+}
+
+function finishSelection() {
+  if(!dragging) return;
+  dragging=false;
+
+  if(selected.length) {
+    const word=selected.map(pos=>matrix[pos.row][pos.col]).join("");
+    const reverse=word.split("").reverse().join("");
+    const match=words.find(w=>(w===word || w===reverse) && !found.includes(w));
+
+    if(match) {
+      found.push(match);
+      points+=match.length*10;
+      selected.forEach(pos=>{
+        const cell=cellAt(pos.row,pos.col);
+        if(cell) cell.classList.add("found");
+      });
+      document.getElementById("word-"+match).classList.add("done");
+      messageElement.textContent=`✨ Excellent! You found ${match}!`;
+      updateStats();
+
+      if(found.length===words.length) {
+        gameOver=true;
+        clearInterval(timer);
+        document.getElementById("complete").style.display="block";
+        messageElement.textContent="🌟 You are a galaxy explorer!";
+      }
+    } else {
+      messageElement.textContent="Keep exploring, astronaut! Try another word.";
+    }
+  }
+
+  selected=[];
+  startCell=null;
+  clearVisualSelection();
+}
+
+gridElement.addEventListener("pointerdown",event=>{
+  const cell=event.target.closest(".cell");
+  if(!cell || gameOver) return;
+  event.preventDefault();
+  isPointerDown=true;
+  gridElement.setPointerCapture?.(event.pointerId);
+  beginSelection({row:Number(cell.dataset.row),col:Number(cell.dataset.col)});
+});
+
+gridElement.addEventListener("pointermove",event=>{
+  if(!isPointerDown) return;
+  const pos=getCellFromPoint(event.clientX,event.clientY);
+  if(pos) moveSelection(pos);
+});
+
+gridElement.addEventListener("pointerup",()=>{
+  isPointerDown=false;
+  finishSelection();
+});
+
+gridElement.addEventListener("pointercancel",()=>{
+  isPointerDown=false;
+  finishSelection();
+});
+
+document.getElementById("clearSelection").addEventListener("click",()=>{
+  dragging=false;
+  selected=[];
+  startCell=null;
+  clearVisualSelection();
+  messageElement.textContent="Selection cleared. Keep searching!";
+});
+
+function newGame() {
+  clearInterval(timer);
+  size=12;
+  words=puzzles[levelElement.value];
+  found=[];
+  points=0;
+  seconds=0;
+  gameOver=false;
+  selected=[];
+  dragging=false;
+  isPointerDown=false;
+  document.getElementById("time").textContent="00:00";
+  document.getElementById("complete").style.display="none";
+  messageElement.textContent="Ready for your mission, astronaut?";
+
+  createMatrix();
+  renderGrid();
+  renderWords();
+  updateStats();
+  startTimer();
+}
+
+document.getElementById("newGame").addEventListener("click",newGame);
+document.getElementById("playAgain").addEventListener("click",newGame);
+levelElement.addEventListener("change",newGame);
+
+newGame();
+</script>
+</body>
+</html>
