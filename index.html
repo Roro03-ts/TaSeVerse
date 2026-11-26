@@ -592,19 +592,43 @@ section {
         drop-shadow(0 0 20px rgba(92,236,255,.2));
 }
 
+/* SPACE FRIENDS */
 .friends-grid {
     display: grid;
-    grid-template-columns: repeat(5, 1fr);
-    gap: 16px;
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    gap: 20px;
 }
 
 .friend-card {
+    position: relative;
+    overflow: hidden;
+    min-width: 0;
     padding: 18px 12px;
+
     text-align: center;
-    border: 1px solid var(--border);
-    border-radius: 22px;
-    background: rgba(13,19,46,.72);
-    transition: .3s ease;
+
+    border: 1px solid rgba(155,108,255,.3);
+    border-radius: 24px;
+
+    background:
+        radial-gradient(circle at 50% 0%, rgba(255,99,200,.16), transparent 65%),
+        linear-gradient(145deg, rgba(23,20,67,.9), rgba(5,10,35,.96));
+
+    box-shadow:
+        0 15px 35px rgba(0,0,0,.3),
+        inset 0 0 22px rgba(92,236,255,.04);
+
+    transition: .35s ease;
+}
+
+.friend-card:hover {
+    transform: translateY(-9px);
+    border-color: var(--pink);
+
+    box-shadow:
+        0 20px 40px rgba(0,0,0,.4),
+        0 0 25px rgba(255,99,200,.15),
+        0 0 35px rgba(155,108,255,.15);
 }
 
 .friend-card:hover {
@@ -613,11 +637,24 @@ section {
 }
 
 .friend-card img {
+    position: relative;
     width: 100%;
-    height: 170px;
+    height: 190px;
     object-fit: contain;
-    margin-bottom: 10px;
-    filter: drop-shadow(0 8px 15px rgba(0,0,0,.4));
+    margin-bottom: 12px;
+
+    filter:
+        drop-shadow(0 8px 15px rgba(0,0,0,.4))
+        drop-shadow(0 0 12px rgba(155,108,255,.22));
+
+    transition: .4s ease;
+}
+
+.friend-card:hover img {
+    transform: scale(1.08) translateY(-5px);
+    filter:
+        drop-shadow(0 10px 18px rgba(0,0,0,.4))
+        drop-shadow(0 0 18px rgba(255,99,200,.3));
 }
 
 .friend-card h3 {
@@ -677,54 +714,106 @@ section {
    JUEGOS
 ================================================== */
 
+/* GALAXY GAMES */
 .games-grid {
     display: grid;
-    grid-template-columns: repeat(5, 1fr);
-    gap: 18px;
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    gap: 20px;
 }
 
 .game-card {
-    min-height: 290px;
-    padding: 24px;
-    border: 1px solid var(--border);
-    border-radius: 24px;
-    background: rgba(13,19,47,.75);
-    transition: .3s ease;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    overflow: hidden;
+
+    min-height: 300px;
+    padding: 25px;
+
+    border: 1px solid rgba(130,155,255,.28);
+    border-radius: 26px;
+
+    background:
+        radial-gradient(circle at 90% 5%, rgba(155,108,255,.2), transparent 45%),
+        linear-gradient(145deg, rgba(20,22,67,.92), rgba(5,9,32,.97));
+
+    box-shadow: 0 16px 40px rgba(0,0,0,.3);
+
+    transition: .4s ease;
+}
+
+.game-card::after {
+    content: "";
+    position: absolute;
+    width: 130px;
+    height: 130px;
+    right: -55px;
+    bottom: -55px;
+    border-radius: 50%;
+    background: rgba(92,236,255,.12);
+    filter: blur(25px);
+    pointer-events: none;
 }
 
 .game-card:hover {
-    transform: translateY(-8px);
-    border-color: rgba(84,232,255,.4);
+    transform: translateY(-10px) scale(1.02);
+    border-color: var(--cyan);
+
+    box-shadow:
+        0 22px 45px rgba(0,0,0,.4),
+        0 0 25px rgba(92,236,255,.13),
+        0 0 35px rgba(155,108,255,.12);
 }
 
 .game-icon {
-    width: 58px;
-    height: 58px;
+    position: relative;
+    z-index: 1;
+
+    width: 65px;
+    height: 65px;
+
     display: grid;
     place-items: center;
-    margin-bottom: 18px;
-    border-radius: 18px;
+
+    margin-bottom: 20px;
+    border: 1px solid rgba(92,236,255,.25);
+    border-radius: 20px;
+
     background: linear-gradient(
         135deg,
-        rgba(84,232,255,.16),
-        rgba(167,122,255,.2)
+        rgba(92,236,255,.2),
+        rgba(155,108,255,.25),
+        rgba(255,99,200,.16)
     );
+
     color: var(--cyan);
-    font-size: 1.7rem;
+    font-size: 1.9rem;
+
+    box-shadow: 0 0 22px rgba(92,236,255,.10);
 }
 
 .game-card h3 {
-    margin-bottom: 10px;
+    position: relative;
+    z-index: 1;
+    margin-bottom: 12px;
+    color: white;
+    font-size: 1.15rem;
 }
 
 .game-card p {
-    color: var(--muted);
-    font-size: .86rem;
-    line-height: 1.5;
+    position: relative;
+    z-index: 1;
+    color: #c9cde8;
+    font-size: .88rem;
+    line-height: 1.6;
 }
 
 .game-card .btn {
-    margin-top: 20px;
+    position: relative;
+    z-index: 2;
+    margin-top: auto;
+    padding-top: 20px;
 }
 
 /* ==================================================
