@@ -2193,103 +2193,9 @@ footer p {
     </div>
 
 
-    <div class="stories-grid">
+   <div class="stories-grid" id="storiesGrid"></div>
 
-        <article class="story-card">
-
-            <div class="story-number">
-                STORY 01
-            </div>
-
-            <h3>
-                The Craziest Day of Our Vacation
-            </h3>
-
-            <p>
-                Una aventura inesperada que convierte unas
-                vacaciones normales en un día inolvidable.
-            </p>
-
-            <button class="btn btn-secondary"
-                    onclick="openStory('vacation')">
-                Leer historia
-            </button>
-
-        </article>
-
-
-        <article class="story-card">
-
-            <div class="story-number">
-                STORY 02
-            </div>
-
-            <h3>
-                The Lost Star
-            </h3>
-
-            <p>
-                Una pequeña estrella necesita ayuda para
-                encontrar el camino de regreso a casa.
-            </p>
-
-            <button class="btn btn-secondary"
-                    onclick="openStory('lost-star')">
-                Leer historia
-            </button>
-
-        </article>
-
-
-        <article class="story-card">
-
-            <div class="story-number">
-                STORY 03
-            </div>
-
-            <h3>
-                A New Friend
-            </h3>
-
-            <p>
-                Una aventura sobre amistad, confianza y
-                conocer a alguien nuevo.
-            </p>
-
-            <button class="btn btn-secondary"
-                    onclick="openStory('new-friend')">
-                Leer historia
-            </button>
-
-        </article>
-
-
-        <article class="story-card">
-
-            <div class="story-number">
-                STORY 04
-            </div>
-
-            <h3>
-                Mission to the Moon
-            </h3>
-
-            <p>
-                La tripulación recibe una misión especial
-                en uno de los lugares más misteriosos.
-            </p>
-
-            <button class="btn btn-secondary"
-                    onclick="openStory('moon')">
-                Leer historia
-            </button>
-
-        </article>
-
-    </div>
-
-
-    <div id="storyPanel" class="interactive-panel"></div>
+<div id="storyPanel" class="interactive-panel"></div>
 
 </section>
 
@@ -2844,72 +2750,486 @@ window.selectSong(0);
 
 const stories = {
 
+   const stories = {
+
     vacation: {
+        title: "The Craziest Day of Our Vacation",
+        level: "A2",
+        text: `
+The vacation was supposed to be quiet and relaxing.
+Everything changed when the friends decided to explore a mysterious place near the beach.
 
-        title:"The Craziest Day of Our Vacation",
+They followed a strange sound and discovered a hidden path. At the end of the path, they found an old boat with a treasure map inside.
 
-        text:`
-        The vacation was supposed to be quiet and relaxing.
-        Everything changed when the friends decided to explore
-        a mysterious place near the beach.
+Suddenly, a little monkey appeared and stole the map! The friends ran after it through the trees.
 
-        They followed a strange sound and discovered a hidden
-        path. At the end of the path, they found something that
-        nobody expected.
+After a funny chase, they recovered the map and discovered that the treasure was a box full of colorful seashells.
 
-        It was the craziest day of their vacation.
+It was the craziest day of their vacation, and nobody wanted it to end.
         `
     },
 
     "lost-star": {
+        title: "The Lost Star",
+        level: "A1",
+        text: `
+One night, a little star disappeared from the sky.
 
-        title:"The Lost Star",
+The TaSeVerse crew decided to help. They travelled across different planets looking for the lost star.
 
-        text:`
-        One night, a little star disappeared from the sky.
+They visited a purple planet, a blue planet and a planet full of flowers.
 
-        The TaSeVerse crew decided to help.
-        They travelled across different planets looking for
-        the lost star.
+Finally, they found the little star behind a big moon. It was afraid and missed its home.
 
-        After a long journey, they finally found it and helped
-        it return home.
+The crew helped it return to the sky. That night, the star shone brighter than ever.
         `
     },
 
     "new-friend": {
+        title: "A New Friend",
+        level: "A1",
+        text: `
+The crew was exploring a new planet when they met someone they had never seen before.
 
-        title:"A New Friend",
+The little alien was hiding behind a tree. At first, everyone was a little nervous.
 
-        text:`
-        The crew was exploring a new planet when they met
-        someone they had never seen before.
+Roxi smiled and said, "Hello! Would you like to be our friend?"
 
-        At first, everyone was a little nervous.
-        Soon they discovered that their new friend was kind,
-        curious and ready for an adventure.
+The alien smiled too. Its name was Lumo, and it loved music, games and adventures.
 
-        From that day on, the crew was no longer alone.
+They played together all afternoon. From that day on, the crew was no longer alone.
         `
     },
 
     moon: {
+        title: "Mission to the Moon",
+        level: "A2",
+        text: `
+Roxi received an important mission.
 
-        title:"Mission to the Moon",
+The crew had to travel to the Moon and discover what was causing a mysterious signal.
 
-        text:`
-        Roxi received an important mission.
+When they arrived, they found a small machine under a rock. It was sending a message into space.
 
-        The crew had to travel to the Moon and discover
-        what was causing a mysterious signal.
+Asher carefully opened the machine while Toto checked its buttons.
 
-        They worked together, solved the problem and
-        returned to TaSeVerse with a new story to tell.
+They discovered that it was an old communication device. They repaired it and sent a message back to Earth.
+
+The crew returned to TaSeVerse with a new story to tell.
+        `
+    },
+
+    "secret-planet": {
+        title: "Roxi and the Secret Planet",
+        level: "A1",
+        text: `
+One morning, Roxi found a strange button inside the spaceship.
+
+"What does this button do?" asked Toto.
+
+Roxi pressed it. Suddenly, a bright light appeared, and the spaceship started moving very fast.
+
+They arrived on a secret planet. Everything was green, the rivers were pink, and the trees had golden leaves.
+
+A friendly creature welcomed them and showed them a beautiful garden.
+
+Roxi discovered that the planet was full of wonderful surprises.
+        `
+    },
+
+    "magical-backpack": {
+        title: "The Magical Backpack",
+        level: "A1",
+        text: `
+Nunu had a new backpack. It looked ordinary, but it was magical.
+
+Every time Nunu opened it, something different appeared.
+
+First, there was a little airplane. Then, a box of cookies and a yellow umbrella.
+
+One rainy afternoon, Nunu needed a place to help a lost puppy.
+
+He opened the backpack and found a warm blanket.
+
+"Thank you, magical backpack!" he said.
+
+The puppy was happy, and Nunu learned that the best magic is helping others.
+        `
+    },
+
+    "little-robot": {
+        title: "Where Is My Little Robot?",
+        level: "A1",
+        text: `
+Asher had a little robot called Beep.
+
+One morning, Beep was missing!
+
+Asher looked under the bed, behind the door and inside the kitchen.
+
+"Beep! Where are you?"
+
+He heard a small noise near the garden. There was Beep, playing with a butterfly.
+
+Asher laughed and picked up his robot.
+
+"Next time, tell me before you go on an adventure!"
+        `
+    },
+
+    "forest-colors": {
+        title: "The Forest of Colors",
+        level: "A1",
+        text: `
+One day, the crew visited a magical forest.
+
+The trees were blue, the flowers were orange, and the grass was purple.
+
+"Look at that beautiful red bird!" said Roxi.
+
+They followed the bird and found a little lake. The water changed colors every time they touched it.
+
+The friends played until sunset.
+
+Before leaving, they planted a small tree. They promised to visit the colorful forest again.
+        `
+    },
+
+    "blue-door": {
+        title: "The Mystery of the Blue Door",
+        level: "A2",
+        text: `
+Inside the spaceship, Fenderson discovered a blue door that nobody had noticed before.
+
+There was no handle, no keyhole and no sign.
+
+The crew tried different ways to open it. They pushed, pulled and even sang a song.
+
+Suddenly, the door began to glow.
+
+It opened slowly, revealing a small room filled with photographs of planets.
+
+On the wall, there was a message: "Every great adventure begins with curiosity."
+
+The crew smiled. A new mystery was waiting.
+        `
+    },
+
+    "day-at-zoo": {
+        title: "A Day at the Zoo",
+        level: "A1",
+        text: `
+The friends visited a zoo on Earth.
+
+They saw tall giraffes, playful monkeys and beautiful butterflies.
+
+Toto loved the lions because they were strong and brave.
+
+Nunu laughed when a monkey copied his movements.
+
+Before going home, the friends learned about protecting animals and their habitats.
+
+They promised to respect nature and never disturb wild animals.
+        `
+    },
+
+    "little-dragon": {
+        title: "The Little Dragon's Dream",
+        level: "A1",
+        text: `
+There was a little dragon named Flamy.
+
+Flamy wanted to fly across the sky, but he was afraid of heights.
+
+One day, his friends encouraged him to try.
+
+He opened his wings and jumped from a small hill.
+
+At first, he felt scared. Then, the wind lifted him into the air.
+
+Flamy was flying!
+
+He discovered that being brave does not mean having no fear. It means trying even when something feels difficult.
+        `
+    },
+
+    "space-birthday": {
+        title: "The Space Birthday Party",
+        level: "A2",
+        text: `
+It was Roxi's birthday, and the crew planned a surprise party.
+
+They decorated the spaceship with stars, balloons and colorful lights.
+
+Sary prepared a delicious cake, while Sergi organized the games.
+
+When Roxi entered the room, everyone shouted, "Surprise!"
+
+There was music, dancing and lots of laughter.
+
+The best gift was a photo album with memories of their adventures together.
+
+Roxi felt very happy. Friends made the birthday unforgettable.
+        `
+    },
+
+    "time-clock": {
+        title: "The Time-Traveling Clock",
+        level: "A2",
+        text: `
+Andy found an unusual clock in an old laboratory.
+
+It had three buttons: yesterday, today and tomorrow.
+
+He pressed the first button and suddenly travelled to the past.
+
+He saw the spaceship when it was new and met the first explorers.
+
+Then he pressed tomorrow and saw a city full of flying cars.
+
+Andy returned to the present with an important lesson: the future depends on what we do today.
+        `
+    },
+
+    "lost-toys": {
+        title: "The Island of Lost Toys",
+        level: "A2",
+        text: `
+During a journey across the ocean, the crew discovered a small island.
+
+It was covered with toys: teddy bears, wooden trains and colorful dolls.
+
+A little robot explained that the toys had been forgotten by their owners.
+
+The friends decided to help them.
+
+They repaired the broken toys and organized a special day to find new homes for them.
+
+By sunset, every toy had a new friend.
+        `
+    },
+
+    "animal-language": {
+        title: "The Secret Language of Animals",
+        level: "A2",
+        text: `
+Dani discovered a strange device that could translate animal sounds.
+
+The first animal they met was a bird.
+
+"Good morning!" said the bird through the translator.
+
+The crew was amazed. They visited other animals and listened to their stories.
+
+A small rabbit explained that the forest needed more trees and clean water.
+
+The friends decided to organize a mission to protect the animals' home.
+
+They learned that listening is the first step to understanding.
+        `
+    },
+
+    "unexpected-journey": {
+        title: "An Unexpected Journey",
+        level: "B1",
+        text: `
+The crew had planned a short trip to a nearby planet. However, a sudden storm changed their route.
+
+Their spaceship landed in an unfamiliar place, far beyond the maps they knew.
+
+At first, they felt confused. They had limited supplies and no communication signal.
+
+Instead of arguing, they shared their ideas and divided the tasks.
+
+While Roxi repaired the navigation system, Asher searched for a safe place to rest.
+
+After several hours, they managed to send a signal.
+
+The journey was not what they expected, but it taught them the importance of teamwork and staying calm during difficult situations.
+        `
+    },
+
+    "last-tree": {
+        title: "The Last Tree on Earth",
+        level: "A2",
+        text: `
+The crew travelled to Earth in the future and discovered a surprising problem.
+
+Most of the forests had disappeared. There was only one small tree left in a protected garden.
+
+A young girl named Emma explained that people had forgotten to care for nature.
+
+The crew decided to help her. They collected seeds, cleaned the rivers and planted new trees.
+
+Many people joined the mission.
+
+Years later, the planet became greener again.
+
+Everyone understood that small actions can create big changes.
+        `
+    },
+
+    "girl-stars": {
+        title: "The Girl Who Followed the Stars",
+        level: "B1",
+        text: `
+Maya loved looking at the night sky. Every evening, she imagined travelling beyond the stars.
+
+One night, she noticed that three stars were forming a strange pattern.
+
+She drew the pattern in her notebook and discovered that it looked like a map.
+
+With the help of her grandfather, Maya built a small telescope and studied the sky.
+
+The map led her to an old observatory in the mountains.
+
+Inside, she found letters written by an astronomer who had dreamed of exploring the universe.
+
+Maya decided to continue his work. She realized that curiosity could take her further than she had ever imagined.
+        `
+    },
+
+    "missing-moon": {
+        title: "The Mystery of the Missing Moon",
+        level: "A2",
+        text: `
+One evening, the crew looked out of the spaceship window and noticed something strange.
+
+The Moon was missing!
+
+They checked their maps and travelled around Earth, but they could not find it.
+
+Suddenly, a small satellite sent a message.
+
+The Moon was not gone. It was hidden behind a giant space cloud.
+
+The crew activated the spaceship lights and sent a signal.
+
+Slowly, the Moon appeared again.
+
+Everyone celebrated the discovery and returned home relieved.
+        `
+    },
+
+    "robot-feelings": {
+        title: "A Robot with Feelings",
+        level: "A2",
+        text: `
+Beep was a robot designed to help people.
+
+He could clean rooms, carry objects and answer questions. But he wanted to understand feelings.
+
+One day, he saw a friend crying.
+
+Beep did not know what to do, so he sat beside the friend and listened.
+
+The friend explained the problem and slowly began to feel better.
+
+Beep discovered that helping was not always about fixing things.
+
+Sometimes, being present and listening was enough.
+        `
+    },
+
+    "under-the-sea": {
+        title: "The Adventure Under the Sea",
+        level: "A1",
+        text: `
+The crew put on their diving suits and explored the ocean.
+
+They saw colorful fish, a big turtle and a friendly dolphin.
+
+The dolphin showed them a beautiful coral reef.
+
+Suddenly, they found plastic bottles and bags in the water.
+
+The friends collected the rubbish and cleaned the area.
+
+Before returning to the spaceship, they promised to protect the ocean and all the animals living there.
+        `
+    },
+
+    "backwards-day": {
+        title: "The Day Everything Went Backwards",
+        level: "B1",
+        text: `
+It started like an ordinary morning, but something was clearly wrong.
+
+The clocks were moving backwards, people were saying goodbye before saying hello, and the spaceship was flying in reverse.
+
+The crew tried to understand what was happening.
+
+Fenderson discovered that a small device had changed the direction of time inside the ship.
+
+They had to work together to turn it off before the problem spread.
+
+After several attempts, the device stopped.
+
+Everything returned to normal, but the crew agreed to check strange machines more carefully in the future.
+        `
+    },
+
+    "guardian-dreams": {
+        title: "The Guardian of Dreams",
+        level: "B1",
+        text: `
+Beyond the known planets, there was a place where dreams were kept like shining lights.
+
+A guardian named Elara protected them.
+
+One night, several lights began to disappear. Without them, people across the universe started forgetting their hopes and goals.
+
+The TaSeVerse crew offered to help.
+
+They followed a trail of silver dust and found a dark planet where the lights were trapped.
+
+Together, they released the dreams.
+
+Elara thanked them and reminded them that every great achievement begins with a dream and the courage to pursue it.
+        `
+    },
+
+    "message-future": {
+        title: "A Message from the Future",
+        level: "B1",
+        text: `
+One afternoon, the spaceship received a message from an unknown sender.
+
+The message contained a date from twenty years in the future and a warning: "Do not forget what matters most."
+
+The crew investigated the signal and discovered that it came from a future version of their own spaceship.
+
+The message explained that they had once become so focused on exploring new worlds that they had forgotten to take care of one another.
+
+The crew decided to remember the warning.
+
+Adventure was important, but friendship, kindness and teamwork were just as valuable.
+        `
+    },
+
+    "greatest-adventure": {
+        title: "The Greatest Adventure Begins",
+        level: "B1",
+        text: `
+The day had finally arrived. The TaSeVerse crew was ready to explore a region of space that nobody had visited before.
+
+They checked their equipment, prepared their supplies and said goodbye to their friends.
+
+As the spaceship moved away from their home planet, a thousand stars appeared outside the windows.
+
+Nobody knew what they would find.
+
+There could be new planets, unexpected challenges and extraordinary friends.
+
+Roxi looked at the crew and smiled.
+
+"This is only the beginning," she said.
+
+And with those words, their greatest adventure began.
         `
     }
 
 };
-
 
 function openStory(storyId){
 
