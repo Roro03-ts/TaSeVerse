@@ -3231,6 +3231,48 @@ And with those words, their greatest adventure began.
 
 };
 
+
+function renderStories(){
+
+    const grid = document.getElementById("storiesGrid");
+
+    if(!grid) return;
+
+    grid.innerHTML = Object.entries(stories).map(([id, story], index) => {
+
+        const preview = story.text
+            .replace(/<[^>]*>/g, " ")
+            .replace(/\s+/g, " ")
+            .trim()
+            .slice(0, 130) + "...";
+
+        return `
+            <article class="story-card">
+
+                <div class="story-number">
+                    STORY ${String(index + 1).padStart(2, "0")}
+                </div>
+
+                <span class="player-level">
+                    ${story.level}
+                </span>
+
+                <h3>${story.title}</h3>
+
+                <p>${preview}</p>
+
+                <button class="btn btn-secondary"
+                        onclick="openStory('${id}')">
+                    Leer historia
+                </button>
+
+            </article>
+        `;
+
+    }).join("");
+
+}
+   
 function openStory(storyId){
 
     const story = stories[storyId];
@@ -3757,11 +3799,9 @@ function searchVocabulary(){
 /* ==================== INICIO ==================== */
 
 document.addEventListener("DOMContentLoaded", () => {
-
     loadGrammarQuestion();
-
     renderVocabulary();
-
+    renderStories();
 });
 
 
