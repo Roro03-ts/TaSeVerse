@@ -2758,7 +2758,7 @@ const songs = [
 
 let currentSong = 0;
 
-function selectSong(index) {
+window.selectSong = function(index) { 
     const song = songs[index];
     if (!song) return;
 
@@ -2816,9 +2816,9 @@ function selectSong(index) {
     document.querySelectorAll(".music-item").forEach((item, i) => {
         item.classList.toggle("active", i === index);
     });
-}
+};
 
-function playSong() {
+window.playSong = function() {
     const song = songs[currentSong];
     const video = document.getElementById("songVideo");
     const audio = document.getElementById("songAudio");
@@ -2831,9 +2831,9 @@ function playSong() {
     } else if (status) {
         status.textContent = "Esta canción estará disponible próximamente.";
     }
-}
+};
 
-selectSong(0);
+window.selectSong(0);
 
 
 /* ==================== FIN MUSIC STATION ==================== */
