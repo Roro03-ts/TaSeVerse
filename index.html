@@ -1354,6 +1354,155 @@ footer p {
         height: 300px;
     }
 }
+
+   
+/* GRAMMAR LEVEL SELECTOR */
+
+.grammar-level-selector {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 14px;
+    margin-bottom: 35px;
+}
+
+.grammar-level-btn {
+    padding: 13px 25px;
+    border: 1px solid rgba(155,108,255,.4);
+    border-radius: 14px;
+    background: linear-gradient(135deg, rgba(20,25,65,.9), rgba(45,20,85,.8));
+    color: #dce5ff;
+    font-size: .95rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all .3s ease;
+    box-shadow: 0 0 15px rgba(92,236,255,.06);
+}
+
+.grammar-level-btn:hover {
+    transform: translateY(-4px);
+    border-color: #5cecff;
+    box-shadow: 0 0 20px rgba(92,236,255,.2);
+}
+
+.grammar-level-btn.active {
+    color: white;
+    border-color: #5cecff;
+    background: linear-gradient(120deg, #245b9e, #7541b8, #a52e8c);
+    box-shadow: 0 0 22px rgba(155,108,255,.35);
+}
+
+@media (max-width: 600px) {
+    .grammar-level-selector {
+        gap: 9px;
+    }
+
+    .grammar-level-btn {
+        padding: 11px 15px;
+        font-size: .82rem;
+    }
+}
+
+
+/* ===== TASEVERSE NAVBAR & COSMIC FOOTER FIX ===== */
+
+.navbar {
+    background: linear-gradient(
+        100deg,
+        rgba(3, 5, 25, .98),
+        rgba(29, 12, 65, .96),
+        rgba(5, 15, 42, .98)
+    ) !important;
+    backdrop-filter: blur(22px);
+    border-bottom: 1px solid rgba(92,236,255,.35);
+    box-shadow: 0 5px 30px rgba(92,236,255,.12),
+                0 5px 35px rgba(155,108,255,.15);
+}
+
+.nav-links {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.nav-links a {
+    color: #eef0ff !important;
+    padding: 11px 16px;
+    border-radius: 12px;
+    font-weight: 700;
+    transition: .3s ease;
+}
+
+.nav-links a:hover {
+    color: #5cecff !important;
+    background: linear-gradient(120deg,
+        rgba(92,236,255,.12),
+        rgba(155,108,255,.2),
+        rgba(255,99,200,.12)
+    );
+    box-shadow: 0 0 18px rgba(155,108,255,.18);
+    transform: translateY(-2px);
+}
+
+/* Fondo general de todas las secciones */
+
+body {
+    background-color: #040615 !important;
+    background-image:
+        radial-gradient(ellipse at 15% 20%, rgba(76,45,150,.22), transparent 42%),
+        radial-gradient(ellipse at 85% 55%, rgba(40,80,150,.18), transparent 45%),
+        radial-gradient(ellipse at 50% 95%, rgba(155,40,130,.13), transparent 40%),
+        url("assets/space-background.png") !important;
+    background-position: center, center, center, center;
+    background-size: cover, cover, cover, cover;
+    background-attachment: fixed;
+}
+
+section,
+footer {
+    background: transparent !important;
+}
+
+/* Tarjetas y paneles sin gris */
+
+.story-card,
+.grammar-box,
+.vocabulary-card,
+.game-card,
+.character-card,
+.friend-card,
+.music-player,
+.music-list {
+    background: linear-gradient(
+        145deg,
+        rgba(13,19,52,.94),
+        rgba(32,17,70,.88),
+        rgba(12,25,55,.94)
+    ) !important;
+    border: 1px solid rgba(155,108,255,.25);
+    box-shadow: 0 10px 35px rgba(0,0,0,.25),
+                0 0 20px rgba(92,236,255,.05);
+}
+
+/* Textos */
+
+.section-title,
+h2, h3 {
+    color: #f5f3ff;
+}
+
+.section-description,
+p {
+    color: #cbd3ef;
+}
+
+/* Pie de página */
+
+footer {
+    border-top: 1px solid rgba(155,108,255,.3);
+    box-shadow: 0 -10px 35px rgba(92,236,255,.06);
+}
+
 </style>
 </head>
 <body>
@@ -2222,9 +2371,30 @@ footer p {
     </div>
 
 
-    <div class="grammar-box">
+    
+<div class="grammar-box">
 
-        <div class="grammar-top">
+    <div class="grammar-level-selector">
+
+        <button class="grammar-level-btn active"
+                onclick="selectGrammarLevel('A1')">
+            A1 · Beginner
+        </button>
+
+        <button class="grammar-level-btn"
+                onclick="selectGrammarLevel('A2')">
+            A2 · Elementary
+        </button>
+
+        <button class="grammar-level-btn"
+                onclick="selectGrammarLevel('B1')">
+            B1 · Intermediate
+        </button>
+
+    </div>
+
+    <div class="grammar-top">
+
 
             <span id="grammarProgress">
                 Question 1 of 10
@@ -3328,69 +3498,52 @@ function closeStory(){
 
 /* ==================== GRAMATICA ==================== */
 
-const grammarQuestions = [
+const grammarLevels = {
 
-    {
-        question:"She ___ a student.",
-        options:["am","is","are","be"],
-        answer:"is"
-    },
+    A1: [
+        { question:"She ___ a student.", options:["am","is","are","be"], answer:"is" },
+        { question:"They ___ my friends.", options:["is","am","are","be"], answer:"are" },
+        { question:"I ___ from Colombia.", options:["is","are","am","be"], answer:"am" },
+        { question:"He ___ football every Sunday.", options:["play","plays","playing","played"], answer:"plays" },
+        { question:"We ___ English at school.", options:["study","studies","studying","studied"], answer:"study" },
+        { question:"There ___ a book on the table.", options:["are","am","is","be"], answer:"is" },
+        { question:"There ___ three students here.", options:["is","am","are","be"], answer:"are" },
+        { question:"She ___ like coffee.", options:["don't","doesn't","isn't","not"], answer:"doesn't" },
+        { question:"___ you like music?", options:["Does","Are","Do","Is"], answer:"Do" },
+        { question:"My brother ___ a blue bicycle.", options:["have","has","having","had"], answer:"has" }
+    ],
 
-    {
-        question:"They ___ my friends.",
-        options:["is","am","are","be"],
-        answer:"are"
-    },
+    A2: [
+        { question:"Yesterday, I ___ to the park.", options:["go","goes","went","going"], answer:"went" },
+        { question:"She has lived here ___ 2020.", options:["for","since","during","at"], answer:"since" },
+        { question:"There isn't ___ milk in the fridge.", options:["some","many","any","a"], answer:"any" },
+        { question:"If it rains, we ___ at home.", options:["stay","stayed","will stay","staying"], answer:"will stay" },
+        { question:"This book is ___ than that one.", options:["interesting","more interesting","most interesting","the interesting"], answer:"more interesting" },
+        { question:"I am interested ___ learning English.", options:["on","at","in","for"], answer:"in" },
+        { question:"They ___ watching TV when I arrived.", options:["was","were","are","is"], answer:"were" },
+        { question:"You ___ wear a seat belt in a car.", options:["should","would","couldn't","might not"], answer:"should" },
+        { question:"She ___ already finished her homework.", options:["have","has","having","is"], answer:"has" },
+        { question:"We have lived here ___ five years.", options:["since","from","for","during"], answer:"for" }
+    ],
 
-    {
-        question:"I ___ from Colombia.",
-        options:["is","are","am","be"],
-        answer:"am"
-    },
+    B1: [
+        { question:"If I ___ more time, I would travel.", options:["have","had","will have","has"], answer:"had" },
+        { question:"The letter ___ yesterday.", options:["sent","was sent","is sending","has send"], answer:"was sent" },
+        { question:"She asked me where I ___.", options:["live","lived","am living","will live"], answer:"lived" },
+        { question:"By next year, I ___ my studies.", options:["finish","finished","will have finished","am finishing"], answer:"will have finished" },
+        { question:"He isn't used to ___ early.", options:["wake up","waking up","woke up","wakes up"], answer:"waking up" },
+        { question:"I wish I ___ speak French fluently.", options:["can","could","will","must"], answer:"could" },
+        { question:"Despite ___ tired, she continued working.", options:["be","being","was","been"], answer:"being" },
+        { question:"The woman ___ lives next door is a doctor.", options:["which","whose","who","where"], answer:"who" },
+        { question:"You should have ___ me earlier.", options:["tell","told","telling","tells"], answer:"told" },
+        { question:"Unless you study, you ___ pass the exam.", options:["wouldn't","won't","didn't","haven't"], answer:"won't" }
+    ]
 
-    {
-        question:"He ___ football every Sunday.",
-        options:["play","plays","playing","played"],
-        answer:"plays"
-    },
+};
 
-    {
-        question:"We ___ English at school.",
-        options:["study","studies","studying","studied"],
-        answer:"study"
-    },
-
-    {
-        question:"There ___ a book on the table.",
-        options:["are","am","is","be"],
-        answer:"is"
-    },
-
-    {
-        question:"There ___ three students here.",
-        options:["is","am","are","be"],
-        answer:"are"
-    },
-
-    {
-        question:"She ___ like coffee.",
-        options:["don't","doesn't","isn't","not"],
-        answer:"doesn't"
-    },
-
-    {
-        question:"___ you like music?",
-        options:["Does","Are","Do","Is"],
-        answer:"Do"
-    },
-
-    {
-        question:"My brother ___ a blue bicycle.",
-        options:["have","has","having","had"],
-        answer:"has"
-    }
-
-];
+let currentGrammarLevel = "A1";
+let grammarQuestions = grammarLevels.A1;
+   
 
 
 let grammarIndex = 0;
@@ -3398,10 +3551,30 @@ let grammarScore = 0;
 let grammarAnswered = false;
 
 
+
+function selectGrammarLevel(level){
+
+    currentGrammarLevel = level;
+    grammarQuestions = grammarLevels[level];
+
+    grammarIndex = 0;
+    grammarScore = 0;
+    grammarAnswered = false;
+
+    document.querySelectorAll(".grammar-level-btn").forEach(button => {
+        button.classList.toggle(
+            "active",
+            button.textContent.trim().startsWith(level)
+        );
+    });
+
+    restartGrammar();
+}
+
+
 function loadGrammarQuestion(){
 
-    const question =
-        grammarQuestions[grammarIndex];
+    const question = grammarQuestions[grammarIndex];
 
     if(!question) return;
 
@@ -3417,31 +3590,24 @@ function loadGrammarQuestion(){
         `Score: ${grammarScore}`;
 
     document.getElementById("grammarProgressBar").style.width =
-        `${((grammarIndex) / grammarQuestions.length) * 100}%`;
+        `${(grammarIndex / grammarQuestions.length) * 100}%`;
 
     document.getElementById("grammarFeedback").textContent = "";
 
-    document.getElementById("nextGrammar").style.display =
-        "none";
+    document.getElementById("nextGrammar").style.display = "none";
 
-    const options =
-        document.getElementById("grammarOptions");
+    const options = document.getElementById("grammarOptions");
 
     options.innerHTML = "";
 
     question.options.forEach(option => {
 
-        const button =
-            document.createElement("button");
+        const button = document.createElement("button");
 
-        button.className =
-            "grammar-option";
+        button.className = "grammar-option";
+        button.textContent = option;
 
-        button.textContent =
-            option;
-
-        button.onclick = () =>
-            checkGrammarAnswer(option);
+        button.onclick = () => checkGrammarAnswer(option);
 
         options.appendChild(button);
 
@@ -3456,64 +3622,47 @@ function checkGrammarAnswer(selected){
 
     grammarAnswered = true;
 
-    const question =
-        grammarQuestions[grammarIndex];
+    const question = grammarQuestions[grammarIndex];
 
-    const buttons =
-        document.querySelectorAll(".grammar-option");
+    const buttons = document.querySelectorAll(".grammar-option");
 
     buttons.forEach(button => {
 
         button.disabled = true;
 
         if(button.textContent === question.answer){
-
             button.classList.add("correct");
-
         }
 
-        if(
-            button.textContent === selected &&
-            selected !== question.answer
-        ){
-
+        if(button.textContent === selected && selected !== question.answer){
             button.classList.add("incorrect");
-
         }
 
     });
 
-
-    const feedback =
-        document.getElementById("grammarFeedback");
-
+    const feedback = document.getElementById("grammarFeedback");
 
     if(selected === question.answer){
 
         grammarScore++;
 
-        feedback.textContent =
-            "Correct! Great job.";
+        feedback.textContent = "Correct! Great job.";
 
-        feedback.className =
-            "grammar-feedback correct-feedback";
+        feedback.className = "grammar-feedback correct-feedback";
 
     }else{
 
         feedback.textContent =
             `Not quite. The correct answer is "${question.answer}".`;
 
-        feedback.className =
-            "grammar-feedback incorrect-feedback";
+        feedback.className = "grammar-feedback incorrect-feedback";
 
     }
-
 
     document.getElementById("grammarScore").textContent =
         `Score: ${grammarScore}`;
 
-    document.getElementById("nextGrammar").style.display =
-        "inline-flex";
+    document.getElementById("nextGrammar").style.display = "inline-flex";
 
 }
 
@@ -3537,35 +3686,25 @@ function nextGrammarQuestion(){
 
 function showGrammarResult(){
 
-    const box =
-        document.querySelector(".grammar-box");
+    const box = document.querySelector(".grammar-box");
 
     box.innerHTML = `
 
         <div class="grammar-result">
 
-            <div class="result-icon">
-                ★
-            </div>
+            <div class="result-icon">★</div>
 
-            <span class="question-label">
-                MISSION COMPLETE
-            </span>
+            <span class="question-label">MISSION COMPLETE</span>
 
-            <h3>
-                Grammar Challenge finished!
-            </h3>
+            <h3>Grammar Challenge finished!</h3>
 
             <p>
+                Level ${currentGrammarLevel} completed!
                 Your final score is
-                <strong>
-                    ${grammarScore}/${grammarQuestions.length}
-                </strong>
+                <strong>${grammarScore}/${grammarQuestions.length}</strong>
             </p>
 
-            <button
-                class="btn btn-primary"
-                onclick="restartGrammar()">
+            <button class="btn btn-primary" onclick="restartGrammar()">
                 Try again
             </button>
 
@@ -3579,62 +3718,61 @@ function showGrammarResult(){
 function restartGrammar(){
 
     grammarIndex = 0;
-
     grammarScore = 0;
+    grammarAnswered = false;
 
-    const section =
-        document.getElementById("gramatica");
+    const box = document.querySelector(".grammar-box");
 
-    section.querySelector(".grammar-box").innerHTML = `
+    box.innerHTML = `
+
+        <div class="grammar-level-selector">
+
+            <button class="grammar-level-btn ${currentGrammarLevel === "A1" ? "active" : ""}"
+                    onclick="selectGrammarLevel('A1')">
+                A1 · Beginner
+            </button>
+
+            <button class="grammar-level-btn ${currentGrammarLevel === "A2" ? "active" : ""}"
+                    onclick="selectGrammarLevel('A2')">
+                A2 · Elementary
+            </button>
+
+            <button class="grammar-level-btn ${currentGrammarLevel === "B1" ? "active" : ""}"
+                    onclick="selectGrammarLevel('B1')">
+                B1 · Intermediate
+            </button>
+
+        </div>
 
         <div class="grammar-top">
 
-            <span id="grammarProgress">
-                Question 1 of 10
-            </span>
-
-            <span id="grammarScore">
-                Score: 0
-            </span>
+            <span id="grammarProgress"></span>
+            <span id="grammarScore"></span>
 
         </div>
 
         <div class="progress-bar">
-
-            <div
-                id="grammarProgressBar"
-                class="progress-fill">
-            </div>
-
+            <div id="grammarProgressBar" class="progress-fill"></div>
         </div>
 
         <div class="grammar-question">
 
-            <span class="question-label">
-                CHOOSE THE CORRECT ANSWER
-            </span>
+            <span class="question-label">CHOOSE THE CORRECT ANSWER</span>
 
             <h3 id="grammarQuestion"></h3>
 
         </div>
 
-        <div
-            id="grammarOptions"
-            class="grammar-options">
-        </div>
+        <div id="grammarOptions" class="grammar-options"></div>
 
-        <div
-            id="grammarFeedback"
-            class="grammar-feedback">
-        </div>
+        <div id="grammarFeedback" class="grammar-feedback"></div>
 
         <div class="grammar-actions">
 
-            <button
-                id="nextGrammar"
-                class="btn btn-primary"
-                onclick="nextGrammarQuestion()"
-                style="display:none;">
+            <button id="nextGrammar"
+                    class="btn btn-primary"
+                    onclick="nextGrammarQuestion()"
+                    style="display:none;">
                 Next question
             </button>
 
@@ -3645,6 +3783,7 @@ function restartGrammar(){
     loadGrammarQuestion();
 
 }
+
 
 
 /* ==================== VOCABULARIO ==================== */
