@@ -1404,104 +1404,242 @@ footer p {
 }
 
 
-/* ===== TASEVERSE NAVBAR & COSMIC FOOTER FIX ===== */
+
+/* ==========================================
+   TASEVERSE — VISUAL REDESIGN
+========================================== */
+
+/* FONDO ESPACIAL: SIN FILTRO MORADO OPACO */
+
+body {
+    background-color: #030617 !important;
+    background-image:
+        radial-gradient(ellipse at 12% 15%, rgba(31,91,160,.13), transparent 38%),
+        radial-gradient(ellipse at 88% 35%, rgba(112,55,180,.10), transparent 38%),
+        url("assets/space-background.png") !important;
+    background-position: center, center, center;
+    background-size: auto, auto, cover;
+    background-attachment: fixed;
+}
+
+body::before {
+    background:
+        radial-gradient(circle at 15% 20%, rgba(92,236,255,.07), transparent 25%),
+        radial-gradient(circle at 85% 25%, rgba(155,108,255,.07), transparent 28%);
+}
+
+/* BARRA DE NAVEGACIÓN */
 
 .navbar {
-    background: linear-gradient(
-        100deg,
-        rgba(3, 5, 25, .98),
-        rgba(29, 12, 65, .96),
-        rgba(5, 15, 42, .98)
-    ) !important;
-    backdrop-filter: blur(22px);
-    border-bottom: 1px solid rgba(92,236,255,.35);
-    box-shadow: 0 5px 30px rgba(92,236,255,.12),
-                0 5px 35px rgba(155,108,255,.15);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    width: 100%;
+    min-height: 82px;
+    padding: 0 5%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 25px;
+
+    background: rgba(3,8,27,.94) !important;
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+
+    border-bottom: 1px solid rgba(92,236,255,.24);
+    box-shadow: 0 8px 30px rgba(0,0,0,.35);
+}
+
+.logo {
+    flex-shrink: 0;
+    font-size: 1.8rem;
+    font-weight: 1000;
+    letter-spacing: -1px;
+    background: linear-gradient(90deg,#5cecff,#9b6cff,#ff63c8);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    filter: drop-shadow(0 0 12px rgba(92,236,255,.25));
 }
 
 .nav-links {
     display: flex;
     align-items: center;
-    gap: 12px;
+    justify-content: flex-end;
+    flex-wrap: wrap;
+    gap: 5px;
 }
 
 .nav-links a {
-    color: #eef0ff !important;
-    padding: 11px 16px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 11px 13px;
+    border: 1px solid transparent;
     border-radius: 12px;
+
+    color: #dce7ff !important;
+    font-size: .83rem;
     font-weight: 700;
-    transition: .3s ease;
+    text-decoration: none;
+
+    transition: all .25s ease;
 }
 
 .nav-links a:hover {
     color: #5cecff !important;
-    background: linear-gradient(120deg,
-        rgba(92,236,255,.12),
-        rgba(155,108,255,.2),
-        rgba(255,99,200,.12)
-    );
-    box-shadow: 0 0 18px rgba(155,108,255,.18);
+    background: rgba(92,236,255,.08);
+    border-color: rgba(92,236,255,.22);
+    box-shadow: 0 0 18px rgba(92,236,255,.10);
     transform: translateY(-2px);
 }
 
-/* Fondo general de todas las secciones */
-
-body {
-    background-color: #040615 !important;
-    background-image:
-        radial-gradient(ellipse at 15% 20%, rgba(76,45,150,.22), transparent 42%),
-        radial-gradient(ellipse at 85% 55%, rgba(40,80,150,.18), transparent 45%),
-        radial-gradient(ellipse at 50% 95%, rgba(155,40,130,.13), transparent 40%),
-        url("assets/space-background.png") !important;
-    background-position: center, center, center, center;
-    background-size: cover, cover, cover, cover;
-    background-attachment: fixed;
+.menu-toggle {
+    color: white;
+    cursor: pointer;
 }
 
-section,
-footer {
+/* SECCIONES: MÁS PROFUNDIDAD Y MENOS OPACIDAD */
+
+section {
     background: transparent !important;
 }
 
-/* Tarjetas y paneles sin gris */
+.section-header {
+    margin-bottom: 55px;
+}
 
-.story-card,
-.grammar-box,
-.vocabulary-card,
-.game-card,
+.section-title {
+    filter:
+        drop-shadow(0 0 14px rgba(92,236,255,.17))
+        drop-shadow(0 0 22px rgba(155,108,255,.12));
+}
+
+/* TARJETAS: AZUL NOCHE, NO MORADO PLÁSTICO */
+
 .character-card,
 .friend-card,
-.music-player,
-.music-list {
+.game-card,
+.story-card,
+.mission-card,
+.level-card,
+.vocabulary-card {
     background: linear-gradient(
         145deg,
-        rgba(13,19,52,.94),
-        rgba(32,17,70,.88),
-        rgba(12,25,55,.94)
+        rgba(8,19,43,.92),
+        rgba(12,16,42,.88)
     ) !important;
-    border: 1px solid rgba(155,108,255,.25);
-    box-shadow: 0 10px 35px rgba(0,0,0,.25),
-                0 0 20px rgba(92,236,255,.05);
+
+    border: 1px solid rgba(115,160,220,.22);
+    box-shadow: 0 14px 35px rgba(0,0,0,.28);
 }
 
-/* Textos */
-
-.section-title,
-h2, h3 {
-    color: #f5f3ff;
+.character-card:hover,
+.friend-card:hover,
+.game-card:hover,
+.story-card:hover,
+.mission-card:hover,
+.level-card:hover {
+    border-color: rgba(92,236,255,.55);
+    box-shadow:
+        0 18px 40px rgba(0,0,0,.38),
+        0 0 24px rgba(92,236,255,.10);
 }
 
-.section-description,
-p {
-    color: #cbd3ef;
+/* PANELES DE APRENDIZAJE */
+
+.grammar-box,
+.interactive-panel,
+.music-player {
+    background: linear-gradient(
+        145deg,
+        rgba(7,17,39,.96),
+        rgba(13,17,43,.94)
+    ) !important;
+
+    border: 1px solid rgba(92,236,255,.20);
+    box-shadow: 0 18px 45px rgba(0,0,0,.30);
 }
 
-/* Pie de página */
+.music-item {
+    background: rgba(7,16,38,.88);
+}
+
+.music-item:hover,
+.music-item.active {
+    background: rgba(29,76,119,.35);
+    border-color: rgba(92,236,255,.55);
+}
+
+/* BÚSQUEDA Y CAMPOS */
+
+.search-box input {
+    background: rgba(5,14,34,.95);
+    border: 1px solid rgba(92,236,255,.28);
+}
+
+.search-box input:focus {
+    border-color: #5cecff;
+    box-shadow: 0 0 18px rgba(92,236,255,.12);
+}
+
+/* BOTONES */
+
+.btn-primary {
+    background: linear-gradient(110deg,#237fc4,#6552c8,#a64cba);
+    border: 1px solid rgba(255,255,255,.20);
+    color: white;
+}
+
+.btn-secondary {
+    background: rgba(17,39,72,.85);
+    border: 1px solid rgba(92,236,255,.28);
+    color: white;
+}
+
+.btn-primary:hover,
+.btn-secondary:hover {
+    filter: brightness(1.18);
+    box-shadow: 0 0 24px rgba(92,236,255,.18);
+}
+
+/* PIE DE PÁGINA */
 
 footer {
-    border-top: 1px solid rgba(155,108,255,.3);
-    box-shadow: 0 -10px 35px rgba(92,236,255,.06);
+    background: linear-gradient(
+        180deg,
+        rgba(4,10,27,.96),
+        rgba(2,5,17,1)
+    ) !important;
+
+    border-top: 1px solid rgba(92,236,255,.20);
+    box-shadow: 0 -12px 35px rgba(0,0,0,.22);
 }
+
+/* RESPONSIVE */
+
+@media (max-width: 1000px) {
+    .navbar {
+        padding: 0 3%;
+        gap: 12px;
+    }
+
+    .nav-links {
+        gap: 2px;
+    }
+
+    .nav-links a {
+        padding: 9px 8px;
+        font-size: .76rem;
+    }
+}
+
+@media (max-width: 800px) {
+    .navbar {
+        min-height: 68px;
+    }
+}
+
 
 </style>
 </head>
