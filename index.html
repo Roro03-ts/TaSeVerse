@@ -103,7 +103,7 @@ body::before {
 }
 
 /* ==================================================
-   HERO — COMPOSICIÓN HORIZONTAL
+   HERO — PORTADA GALÁCTICA
 ================================================== */
 
 .hero {
@@ -111,29 +111,71 @@ body::before {
     min-height: calc(100vh - 72px);
     width: 100%;
     display: grid;
-    grid-template-columns: 43% 57%;
+    grid-template-columns: 44% 56%;
     align-items: center;
-    padding: 45px 6% 65px;
+    padding: 55px 6% 70px;
     overflow: hidden;
+
+    background:
+        linear-gradient(
+            90deg,
+            rgba(3, 5, 25, .78) 0%,
+            rgba(8, 7, 38, .38) 45%,
+            rgba(8, 5, 30, .12) 100%
+        ),
+        url("assets/taseverse-main-art.png.png");
+
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+
+    border-bottom: 1px solid rgba(155,108,255,.25);
 }
 
+/* Brillo galáctico sobre la portada */
 .hero::before {
     content: "";
     position: absolute;
-    width: 650px;
-    height: 650px;
-    right: 5%;
-    top: 50%;
-    transform: translateY(-50%);
-    background: radial-gradient(
-        circle,
-        rgba(86,140,255,.17),
-        rgba(155,108,255,.08) 40%,
-        transparent 70%
-    );
+    inset: 0;
+
+    background:
+        radial-gradient(
+            circle at 75% 45%,
+            rgba(92,236,255,.18),
+            transparent 25%
+        ),
+        radial-gradient(
+            circle at 85% 70%,
+            rgba(255,99,200,.16),
+            transparent 28%
+        ),
+        radial-gradient(
+            circle at 45% 20%,
+            rgba(155,108,255,.18),
+            transparent 30%
+        );
+
     pointer-events: none;
+    z-index: 1;
 }
 
+/* Oscurecimiento suave para que el texto se lea */
+.hero::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+
+    background:
+        linear-gradient(
+            90deg,
+            rgba(2,4,20,.55),
+            transparent 55%
+        );
+
+    pointer-events: none;
+    z-index: 2;
+}
+   
 .hero-content {
     position: relative;
     z-index: 20;
