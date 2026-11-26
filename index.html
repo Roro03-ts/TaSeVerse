@@ -2047,115 +2047,105 @@ footer p {
 <!-- ==================== MUSICA ==================== -->
 
 <section id="musica">
-
     <div class="section-header">
-
-        <div class="section-kicker">
-            MUSIC STATION
-        </div>
-
-        <h2 class="section-title">
-            Aprende con música
-        </h2>
-
+        <div class="section-kicker">MUSIC STATION</div>
+        <h2 class="section-title">Aprende con música</h2>
         <p class="section-description">
-            Las canciones permiten acercarse al inglés de una
-            manera natural, dinámica y memorable.
+            Explora canciones originales, descubre nuevas palabras
+            y aprende inglés al ritmo de TaSeVerse.
         </p>
-
     </div>
-
 
     <div class="music-layout">
 
         <div class="music-list" id="songList">
-
             <button class="music-item active" onclick="selectSong(0)">
-                <span>01</span>
-                <strong>Welcome to TaSeVerse</strong>
-                <small>A1</small>
+                <span>01</span><strong>Welcome to TaSeVerse</strong><small>A1</small>
             </button>
-
             <button class="music-item" onclick="selectSong(1)">
-                <span>02</span>
-                <strong>Hello, Friends!</strong>
-                <small>A1</small>
+                <span>02</span><strong>Hello, Friends!</strong><small>A1</small>
             </button>
-
             <button class="music-item" onclick="selectSong(2)">
-                <span>03</span>
-                <strong>My Little Planet</strong>
-                <small>A1</small>
+                <span>03</span><strong>My Little Planet</strong><small>A1</small>
             </button>
-
             <button class="music-item" onclick="selectSong(3)">
-                <span>04</span>
-                <strong>Colors in Space</strong>
-                <small>A1</small>
+                <span>04</span><strong>Colors in Space</strong><small>A1</small>
             </button>
-
             <button class="music-item" onclick="selectSong(4)">
-                <span>05</span>
-                <strong>My Family</strong>
-                <small>A1</small>
+                <span>05</span><strong>My Family</strong><small>A1</small>
             </button>
-
             <button class="music-item" onclick="selectSong(5)">
-                <span>06</span>
-                <strong>Good Morning</strong>
-                <small>A1</small>
+                <span>06</span><strong>Good Morning</strong><small>A1</small>
             </button>
-
             <button class="music-item" onclick="selectSong(6)">
-                <span>07</span>
-                <strong>Let's Move</strong>
-                <small>A1</small>
+                <span>07</span><strong>Let's Move!</strong><small>A1</small>
             </button>
-
             <button class="music-item" onclick="selectSong(7)">
-                <span>08</span>
-                <strong>Animal Planet</strong>
-                <small>A2</small>
+                <span>08</span><strong>Animal Planet</strong><small>A1</small>
             </button>
-
+            <button class="music-item" onclick="selectSong(8)">
+                <span>09</span><strong>The Days of the Week</strong><small>A1</small>
+            </button>
+            <button class="music-item" onclick="selectSong(9)">
+                <span>10</span><strong>The Numbers Song</strong><small>A1</small>
+            </button>
+            <button class="music-item" onclick="selectSong(10)">
+                <span>11</span><strong>My Body, My World</strong><small>A1</small>
+            </button>
+            <button class="music-item" onclick="selectSong(11)">
+                <span>12</span><strong>Food Around Us</strong><small>A1</small>
+            </button>
+            <button class="music-item" onclick="selectSong(12)">
+                <span>13</span><strong>What's the Weather Like?</strong><small>A2</small>
+            </button>
+            <button class="music-item" onclick="selectSong(13)">
+                <span>14</span><strong>My Daily Routine</strong><small>A2</small>
+            </button>
+            <button class="music-item" onclick="selectSong(14)">
+                <span>15</span><strong>In the City</strong><small>A2</small>
+            </button>
+            <button class="music-item" onclick="selectSong(15)">
+                <span>16</span><strong>The Adventure Begins</strong><small>A2</small>
+            </button>
+            <button class="music-item" onclick="selectSong(16)">
+                <span>17</span><strong>Feelings and Emotions</strong><small>A2</small>
+            </button>
+            <button class="music-item" onclick="selectSong(17)">
+                <span>18</span><strong>Save Our Planet</strong><small>A2</small>
+            </button>
+            <button class="music-item" onclick="selectSong(18)">
+                <span>19</span><strong>A Day in the Past</strong><small>B1</small>
+            </button>
+            <button class="music-item" onclick="selectSong(19)">
+                <span>20</span><strong>Dreams Beyond the Stars</strong><small>B1</small>
+            </button>
         </div>
 
-
         <div class="music-player" id="player">
-
-            <div class="player-orbit">
-
-                <div class="player-disc">
-                    ♪
+            <div class="video-container">
+                <div class="video-placeholder" id="videoPlaceholder">
+                    <div class="video-placeholder-icon">♫</div>
+                    <h3>Tu próxima aventura musical</h3>
+                    <p>El videoclip de esta canción estará disponible próximamente.</p>
+                    <span>TASeVERSE MUSIC STATION</span>
                 </div>
-
+                <video id="songVideo" controls hidden></video>
             </div>
 
             <div class="player-info">
-
-                <span class="player-level">
-                    A1
-                </span>
-
-                <h3 id="songTitle">
-                    Welcome to TaSeVerse
-                </h3>
-
+                <span class="player-level" id="songLevel">A1</span>
+                <h3 id="songTitle">Welcome to TaSeVerse</h3>
                 <p id="songDescription">
                     Una primera aventura musical para comenzar
                     el recorrido por TaSeVerse.
                 </p>
-
-                <button class="btn btn-primary" onclick="playSong()">
-                    Reproducir
-                </button>
-
+                <div class="music-status" id="musicStatus">
+                    Próximamente: canción y videoclip
+                </div>
             </div>
-
         </div>
 
     </div>
-
 </section>
 
 
