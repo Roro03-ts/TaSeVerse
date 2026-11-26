@@ -839,10 +839,31 @@ section {
     gap: 25px;
 }
 
+
 .music-list {
     display: grid;
     gap: 10px;
+    max-height: 560px;
+    overflow-y: auto;
+    padding: 8px 12px 8px 4px;
+    scrollbar-width: thin;
+    scrollbar-color: #9b6cff rgba(255,255,255,.08);
 }
+
+.music-list::-webkit-scrollbar {
+    width: 7px;
+}
+
+.music-list::-webkit-scrollbar-track {
+    background: rgba(255,255,255,.08);
+    border-radius: 10px;
+}
+
+.music-list::-webkit-scrollbar-thumb {
+    background: linear-gradient(#5cecff, #9b6cff, #ff63c8);
+    border-radius: 10px;
+}
+
 
 .music-item {
     width: 100%;
