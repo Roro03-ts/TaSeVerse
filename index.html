@@ -2123,6 +2123,7 @@ footer p {
 
         <div class="music-player" id="player">
             <div class="video-container">
+               <audio id="songAudio" controls hidden></audio>
                 <div class="video-placeholder" id="videoPlaceholder">
                     <div class="video-placeholder-icon">♫</div>
                     <h3>Tu próxima aventura musical</h3>
@@ -2763,42 +2764,114 @@ const songs = [
 ];
 
 
-function selectSong(index){
 
+/* ==================== MUSIC STATION ==================== */
+
+const songs = [
+    { title: "Welcome to TaSeVerse", level: "A1", description: "Una primera aventura musical para comenzar el recorrido por TaSeVerse.", video: "", audio: "" },
+    { title: "Hello, Friends!", level: "A1", description: "Aprende a saludar, presentarte y hacer nuevos amigos.", video: "", audio: "" },
+    { title: "My Little Planet", level: "A1", description: "Descubre los planetas y aprende a describir tu mundo.", video: "", audio: "" },
+    { title: "Colors in Space", level: "A1", description: "Explora los colores mientras viajas por el universo.", video: "", audio: "" },
+    { title: "My Family", level: "A1", description: "Conoce los integrantes de la familia y aprende sus nombres.", video: "", audio: "" },
+    { title: "Good Morning", level: "A1", description: "Comienza el día practicando saludos y expresiones cotidianas.", video: "", audio: "" },
+    { title: "Let's Move!", level: "A1", description: "Aprende acciones y movimientos mientras bailas.", video: "", audio: "" },
+    { title: "Animal Planet", level: "A1", description: "Conoce animales, sus nombres y sus características.", video: "", audio: "" },
+    { title: "The Days of the Week", level: "A1", description: "Aprende los días de la semana con ritmo y diversión.", video: "", audio: "" },
+    { title: "The Numbers Song", level: "A1", description: "Practica los números en inglés cantando.", video: "", audio: "" },
+    { title: "My Body, My World", level: "A1", description: "Descubre las partes del cuerpo en inglés.", video: "", audio: "" },
+    { title: "Food Around Us", level: "A1", description: "Aprende vocabulario sobre alimentos y comidas.", video: "", audio: "" },
+    { title: "What's the Weather Like?", level: "A2", description: "Habla del clima y de los diferentes estados del tiempo.", video: "", audio: "" },
+    { title: "My Daily Routine", level: "A2", description: "Describe tus actividades y hábitos cotidianos.", video: "", audio: "" },
+    { title: "In the City", level: "A2", description: "Recorre la ciudad y descubre lugares y direcciones.", video: "", audio: "" },
+    { title: "The Adventure Begins", level: "A2", description: "Acompaña a la tripulación en una nueva aventura espacial.", video: "", audio: "" },
+    { title: "Feelings and Emotions", level: "A2", description: "Expresa emociones y aprende a hablar sobre cómo te sientes.", video: "", audio: "" },
+    { title: "Save Our Planet", level: "A2", description: "Descubre cómo cuidar el planeta y proteger la naturaleza.", video: "", audio: "" },
+    { title: "A Day in the Past", level: "B1", description: "Cuenta experiencias y acontecimientos del pasado.", video: "", audio: "" },
+    { title: "Dreams Beyond the Stars", level: "B1", description: "Imagina, expresa tus sueños y viaja más allá de las estrellas.", video: "", audio: "" }
+];
+
+let currentSong = 0;
+
+function selectSong(index) {
     const song = songs[index];
+    if (!song) return;
 
-    if(!song) return;
+    currentSong = index;
 
     document.getElementById("songTitle").textContent = song.title;
+    document.getElementById("songDescription").textContent = song.description;
 
-    document.getElementById("songDescription").textContent =
-        song.description;
+    const level = document.getElementById("songLevel") ||
+        document.querySelector(".player-level");
 
-    document.querySelector(".player-level").textContent =
-        song.level;
+    if (level) level.textContent = song.level;
 
-    document.querySelectorAll(".music-item").forEach((item,i)=>{
+    const video = document.getElementById("songVideo");
+    const audio = document.getElementById("songAudio");
+    const placeholder = document.getElementById("videoPlaceholder");
+    const status = document.getElementById("musicStatus");
 
-        item.classList.toggle(
-            "active",
-            i === index
-        );
+    if (video) {
+        video.pause();
+        video.removeAttribute("src");
+        video.load();
 
+        video.hidden = !song.video;
+
+        if (song.video) {
+            video.src = song.video;
+            video.load();
+        }
+    }
+
+    if (audio) {
+        audio.pause();
+        audio.removeAttribute("src");
+        audio.load();
+
+        audio.hidden = !song.audio;
+
+        if (song.audio) {
+            audio.src = song.audio;
+            audio.load();
+        }
+    }
+
+    if (placeholder) {
+        placeholder.hidden = !!song.video;
+    }
+
+    if (status) {
+        status.textContent = song.video || song.audio
+            ? "Canción disponible"
+            : "Próximamente: canción y videoclip";
+    }
+
+    document.querySelectorAll(".music-item").forEach((item, i) => {
+        item.classList.toggle("active", i === index);
     });
-
 }
 
+function playSong() {
+    const song = songs[currentSong];
+    const video = document.getElementById("songVideo");
+    const audio = document.getElementById("songAudio");
+    const status = document.getElementById("musicStatus");
 
-function playSong(){
-
-    const title =
-        document.getElementById("songTitle").textContent;
-
-    alert(
-        "La estación musical está preparando: " + title
-    );
-
+    if (song.video && video) {
+        video.play();
+    } else if (song.audio && audio) {
+        audio.play();
+    } else if (status) {
+        status.textContent = "Esta canción estará disponible próximamente.";
+    }
 }
+
+selectSong(0);
+
+
+/* ==================== FIN MUSIC STATION ==================== */
+
 
 
 /* ==================== CUENTOS ==================== */
